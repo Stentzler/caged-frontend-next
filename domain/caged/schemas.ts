@@ -2,13 +2,14 @@ import { z } from "zod";
 
 const monthSchema = z.string().regex(/^\d{6}$/);
 const stateCodeSchema = z.string().regex(/^\d{2}$/);
+const cityCodeSchema = z.string().regex(/^\d{6}$/);
 const occupationalFamilyCodeSchema = z.string().regex(/^\d{4}$/);
 
 export const cagedQueryInputSchema = z
   .object({
     locale: z.enum(["pt-BR", "en"]),
-    locationType: z.enum(["COUNTRY", "STATE"]),
-    locationCode: stateCodeSchema.optional(),
+    locationType: z.enum(["COUNTRY", "STATE", "CITY"]),
+    locationCode: z.string().optional(),
     professionCode: occupationalFamilyCodeSchema.optional(),
     from: monthSchema.optional(),
     to: monthSchema.optional(),
@@ -22,10 +23,18 @@ export const cagedQueryInputSchema = z
       });
     }
 
-    if (value.locationType === "STATE" && value.locationCode === undefined) {
+    if (value.locationType === "STATE" && !stateCodeSchema.safeParse(value.locationCode).success) {
       context.addIssue({
         code: "custom",
-        message: "State queries require a location code.",
+        message: "State queries require a two-digit location code.",
+        path: ["locationCode"],
+      });
+    }
+
+    if (value.locationType === "CITY" && !cityCodeSchema.safeParse(value.locationCode).success) {
+      context.addIssue({
+        code: "custom",
+        message: "City queries require a six-digit location code.",
         path: ["locationCode"],
       });
     }

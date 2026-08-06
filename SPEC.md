@@ -71,8 +71,8 @@ The following decisions are part of the MVP and must not be changed casually:
   stack as POST requests.
 - CBO occupational-family data is cached on the Next.js server for 24 hours.
 - Query results are not application-cached in the MVP.
-- The UI exposes country and state queries. City queries are outside MVP even
-  though the query Lambda supports them.
+- The UI exposes country, state, and city queries. City selection is narrowed
+  by a selected state but sends only the city code to the query Lambda.
 - If both dates are omitted, Next.js sends neither date and accepts the Lambda's
   default: the latest available dataset month only.
 - CloudFront and AWS WAF are the public edge. Nginx on EC2 proxies to the Next.js
@@ -104,7 +104,6 @@ The following decisions are part of the MVP and must not be changed casually:
 
 ### 5.2 Out of scope
 
-- City-level selection or display.
 - User accounts, authentication, saved searches, favorites, or personalization.
 - Data mutation, uploads, administrative screens, or DynamoDB access.
 - Changing either Lambda, its DynamoDB tables, or its IAM policy from this repo.
@@ -247,14 +246,15 @@ The form contains:
 
 | Field | UI behavior | Lambda mapping |
 | --- | --- | --- |
-| Geography | Country or state selector; defaults to Brazil | `locationType`, `locationCode` |
+| Geography | Country, state, or city selector; defaults to Brazil | `locationType`, `locationCode` |
 | Occupational family | Optional searchable combobox; defaults to all families | `professionCode`, omitted for all |
 | Start month | Optional month selector | `from` as `YYYYMM` |
 | End month | Optional month selector | `to` as `YYYYMM` |
 
 The state selector uses official two-digit IBGE state codes. It exposes all 26
-states and the Federal District. State labels are localized where appropriate,
-but proper names keep their standard Portuguese spelling.
+states and the Federal District. City selection first narrows by state, then
+uses the selected city's six-digit IBGE code. State labels are localized where
+appropriate, but proper names keep their standard Portuguese spelling.
 
 The occupational-family control displays the official Portuguese family title,
 including in the English interface. It may add localized helper text, but must
@@ -419,14 +419,16 @@ Invoke the Lambda synchronously with an object whose relevant shape is:
 
 | Field | Type | MVP behavior |
 | --- | --- | --- |
-| `queryStringParameters.locationType` | string | `COUNTRY` or `STATE` |
-| `queryStringParameters.locationCode` | string, optional | Required by Lambda for `STATE`; omitted for `COUNTRY` |
+| `queryStringParameters.locationType` | string | `COUNTRY`, `STATE`, or `CITY` |
+| `queryStringParameters.locationCode` | string, optional | Required by Lambda for `STATE` or `CITY`; omitted for `COUNTRY` |
 | `queryStringParameters.professionCode` | string, optional | CBO family code; omit to accept Lambda default `ALL` |
 | `queryStringParameters.from` | string, optional | `YYYYMM`; omit together with `to` |
 | `queryStringParameters.to` | string, optional | `YYYYMM`; omit together with `from` |
 
-Do not send `CITY` from the MVP interface. Do not rename these camelCase input
-keys: the Lambda reads them directly from `queryStringParameters`.
+For a city query, send `CITY` and its six-digit city code only; the selected
+state is a UI filter and is not an additional Lambda parameter. Do not rename
+these camelCase input keys: the Lambda reads them directly from
+`queryStringParameters`.
 
 ### 12.2 Invocation output envelope
 
@@ -835,7 +837,8 @@ The MVP is complete when all of the following are true:
 2. Navigation and locale switching work at mobile and desktop widths.
 3. A default Home submission invokes the existing query Lambda with
    `locationType=COUNTRY` and omits profession and dates.
-4. A state submission sends the correct two-digit IBGE `locationCode`.
+4. A state submission sends the correct two-digit IBGE `locationCode`, and a
+   city submission sends the correct six-digit IBGE `locationCode`.
 5. Selecting a family sends its `familyCode`, never an individual occupation
    code.
 6. Omitting both dates lets the Lambda return only its latest available month.
@@ -871,7 +874,6 @@ The following require a later product or architecture decision:
 - Exact CBO Lambda event and response envelope.
 - Whether result filters become shareable URL query parameters.
 - Whether analytics responses receive a short server cache.
-- City-level querying.
 - Dark mode.
 - Data export and saved comparisons.
 - Full observability vendor integration.

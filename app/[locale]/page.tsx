@@ -1,4 +1,7 @@
 import { useTranslations } from "next-intl";
+import { QueryForm } from "@/components/filters/query-form";
+import occupationalFamilies from "@/data/cbo-occupational-families.json";
+import geography from "@/data/caged-geography.json";
 
 export default function HomePage() {
   const t = useTranslations("Home");
@@ -16,6 +19,7 @@ export default function HomePage() {
           {t("description")}
         </p>
       </div>
+      <QueryForm occupationalFamilies={occupationalFamilies} states={geography.states} />
     </section>
   );
 }
