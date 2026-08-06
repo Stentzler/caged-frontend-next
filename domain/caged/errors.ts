@@ -2,6 +2,7 @@ export type CagedErrorCode =
   | "configuration_error"
   | "invalid_input"
   | "invalid_query"
+  | "rate_limited"
   | "unavailable"
   | "upstream_contract_error"
   | "upstream_error";

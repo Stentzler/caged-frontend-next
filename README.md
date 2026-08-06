@@ -29,3 +29,21 @@ The URL is server-only and is accepted only outside production. Production must
 set `AWS_REGION` and `CAGED_QUERY_LAMBDA_FUNCTION_NAME`; the Next.js server then
 uses its IAM role to invoke the Lambda directly. See `.env.example` for all
 available placeholders.
+
+## Production container
+
+The multi-stage Docker build produces a standalone, non-root Next.js image that
+listens on port 3000 and exposes `GET /health`. At runtime, production must also
+provide the public links used in the footer and About page:
+
+```bash
+SITE_OFFICIAL_SOURCE_URL=https://pdet.mte.gov.br/novo-caged
+SITE_GITHUB_URL=https://github.com/Stentzler
+SITE_CONTACT_EMAIL=you@example.com
+```
+
+Build the image with:
+
+```bash
+docker build --tag dataempregos:local .
+```

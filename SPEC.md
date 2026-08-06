@@ -11,7 +11,7 @@
 | Deployment target | Docker container on EC2 behind Nginx, CloudFront, and AWS WAF |
 | Infrastructure repository | `caged-frontend-terraform` |
 | Query backend | Existing `caged-query-lambda`, invoked directly by the Next.js server |
-| CBO backend | A future read-only CBO Lambda, invoked directly by the Next.js server |
+| CBO backend | Bundled static occupational-family JSON; a future read-only CBO Lambda may replace it |
 | Primary locales | Brazilian Portuguese and English |
 
 This document defines the frontend product, application architecture, backend
@@ -69,7 +69,7 @@ The following decisions are part of the MVP and must not be changed casually:
 - The browser never calls Lambda, DynamoDB, API Gateway, or an AWS service.
 - Analytics submissions use a Server Action and therefore reach the public
   stack as POST requests.
-- CBO occupational-family data is cached on the Next.js server for 24 hours.
+- CBO occupational-family data currently comes from a bundled static JSON file.
 - Query results are not application-cached in the MVP.
 - The UI exposes country, state, and city queries. City selection is narrowed
   by a selected state but sends only the city code to the query Lambda.
@@ -89,13 +89,12 @@ The following decisions are part of the MVP and must not be changed casually:
 
 - Responsive Home, Occupational Families, and About pages.
 - Header navigation, locale switcher, and footer.
-- Brazil-wide and state-level analytics queries.
+- Brazil-wide, state-level, and city-level analytics queries.
 - Optional occupational-family selector.
 - Optional paired start and end month controls.
 - Monthly charts, summary values, and accessible data table.
 - Direct server-side invocation of the existing query Lambda.
-- Direct server-side invocation of a future CBO-list Lambda.
-- Shared 24-hour server cache for the CBO family list.
+- Bundled static CBO occupational-family data shared by Home and Occupational Families.
 - Brazilian Portuguese and English interface text.
 - Loading, empty, validation, throttling, backend-unavailable, and unexpected
   error states.
@@ -206,8 +205,7 @@ The exact names may evolve, but boundaries should remain recognizable:
 | `src/actions/query-caged.ts` | Analytics Server Action boundary |
 | `src/server/aws/lambda-client.ts` | Shared AWS Lambda client factory |
 | `src/server/aws/query-lambda-adapter.ts` | Existing query Lambda adapter |
-| `src/server/aws/cbo-lambda-adapter.ts` | Future CBO Lambda adapter |
-| `src/server/cache/get-occupational-families.ts` | Shared 24-hour CBO cache |
+| `data/cbo-occupational-families.json` | Current static CBO occupational-family source |
 | `src/domain/caged/types.ts` | Normalized analytics domain types |
 | `src/domain/caged/schemas.ts` | Boundary schemas and mapping helpers |
 | `src/domain/caged/errors.ts` | Stable application error taxonomy |
@@ -495,6 +493,7 @@ do not rely on JSON object insertion order as the domain guarantee.
 | --- | --- | --- |
 | 200 | Successful query | `success` |
 | 400 | Query rejected by Lambda business validation | `invalid_query` |
+| 429 | Query temporarily limited | `rate_limited` |
 | 503 | Catalog or metrics data temporarily unavailable | `unavailable` |
 | 500 | Unexpected Lambda failure | `upstream_error` |
 | Other non-2xx | Unrecognized upstream response | `upstream_error` |
@@ -503,11 +502,16 @@ Backend `message` strings are diagnostic contract data, not localized UI copy.
 Map known categories to translated messages. A safe message may be retained in
 server logs after redaction.
 
-## 13. Future CBO Lambda contract
+## 13. Current CBO source and future Lambda contract
 
-The CBO Lambda does not exist yet. The frontend adapter boundary must isolate
-that uncertainty. The preferred successful application-level contract is a list
-of unique records:
+The current MVP reads the bundled `data/cbo-occupational-families.json` file.
+It contains only unique `familyCode` and official Portuguese `familyTitle`
+records, is shared by Home and Occupational Families, and does not require a
+network request or server cache.
+
+A CBO Lambda does not exist yet. When introduced, its adapter boundary must
+isolate that uncertainty. The preferred successful application-level contract is
+a list of unique records:
 
 | Field | Type | Meaning |
 | --- | --- | --- |
@@ -525,10 +529,11 @@ When the Lambda is implemented, document its exact invocation event and response
 envelope, then update the adapter schema and contract tests without leaking its
 raw shape into components.
 
-### 13.1 CBO caching
+### 13.1 Future CBO caching
 
-Use Next.js cache utilities based on `use cache` with a 24-hour lifetime. The
-cached function is shared by Home and the Occupational Families page.
+When the CBO Lambda exists, use Next.js cache utilities based on `use cache`
+with a 24-hour lifetime. The cached function must be shared by Home and the
+Occupational Families page.
 
 Caching rules:
 
@@ -691,15 +696,13 @@ The application validates environment values at startup or first server use.
 | `AWS_REGION` | Server | Yes outside fully mocked tests | Lambda client region |
 | `CAGED_QUERY_LAMBDA_FUNCTION_NAME` | Server | Yes | Existing query Lambda name or ARN |
 | `CAGED_QUERY_LAMBDA_URL` | Server | Local development only | Function URL used only outside production |
-| `CAGED_CBO_LAMBDA_FUNCTION_NAME` | Server | Required when CBO integration is enabled | Future CBO Lambda name or ARN |
-| `CBO_CACHE_TTL_SECONDS` | Server | No; default `86400` | CBO cache lifetime |
-| `NEXT_PUBLIC_SITE_URL` | Browser-safe | Deployment-dependent | Canonical public site URL |
-| `NEXT_PUBLIC_GITHUB_URL` | Browser-safe | Yes for footer | Maintainer/project link |
-| `NEXT_PUBLIC_CONTACT_EMAIL` | Browser-safe | Yes for footer | Public contact address |
+| `SITE_OFFICIAL_SOURCE_URL` | Rendered public link | Yes in production | Official Novo CAGED source |
+| `SITE_GITHUB_URL` | Rendered public link | Yes in production | Maintainer/project link |
+| `SITE_CONTACT_EMAIL` | Rendered public link | Yes in production | Public contact address |
 
-Prefer a feature/config switch for the not-yet-existing CBO Lambda if the first
-frontend deployment must precede it. The disabled state must degrade explicitly
-to “all occupational families” rather than inventing fixture data in production.
+The current static CBO source deliberately avoids a feature switch until the
+future Lambda contract exists. The future integration must keep an all-families
+query possible if that source is unavailable.
 
 The local Function URL is not browser configuration and must remain in ignored
 local environment files. It is never accepted in production, where direct IAM
@@ -718,7 +721,8 @@ AWS account numbers when avoidable, or credentials.
 - Do not assume CloudFront caches Server Actions or analytics results.
 - Do not application-cache analytics responses in MVP; the query Lambda already
   performs read-only retrieval from processed DynamoDB records.
-- Cache the CBO family list for 24 hours on the server.
+- Keep the current static CBO file small and only replace it with a cached
+  server-side source when the CBO Lambda contract exists.
 - Avoid layout shift by reserving sensible loading/result space.
 - Keep the initial Home shell useful before chart JavaScript loads.
 
@@ -853,8 +857,8 @@ The MVP is complete when all of the following are true:
 12. The same data is available through an accessible semantic table.
 13. Query 400, 503, 500/invocation, malformed response, and edge 429 states have
     localized safe UI.
-14. The CBO list is shared and cached server-side for 24 hours when its Lambda is
-    available.
+14. The current static CBO list is shared by Home and Occupational Families;
+    when its Lambda is available, the list is cached server-side for 24 hours.
 15. A CBO outage does not make the all-families analytics path unusable.
 16. About accurately describes Novo CAGED, occupational-family grouping,
     limitations, independent status, and official-source link.

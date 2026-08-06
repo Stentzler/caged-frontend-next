@@ -14,6 +14,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { useSyncExternalStore } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import type { CagedQueryResult } from "@/domain/caged/schemas";
 
@@ -31,6 +32,25 @@ type PeriodSummary = {
   dismissals: number;
   netBalance: number;
 };
+
+function subscribeToReducedMotion(onStoreChange: () => void): () => void {
+  const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  mediaQuery.addEventListener("change", onStoreChange);
+
+  return () => mediaQuery.removeEventListener("change", onStoreChange);
+}
+
+function getReducedMotionPreference(): boolean {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function usePrefersReducedMotion(): boolean {
+  return useSyncExternalStore(
+    subscribeToReducedMotion,
+    getReducedMotionPreference,
+    () => true,
+  );
+}
 
 function toMonthlyMetrics(months: CagedQueryResult["months"]): MonthlyMetrics[] {
   return Object.entries(months)
@@ -97,6 +117,7 @@ function ChartCard({ children, title }: Readonly<{ children: React.ReactNode; ti
 export function QueryResults({ result }: QueryResultsProps) {
   const locale = useLocale();
   const t = useTranslations("Results");
+  const prefersReducedMotion = usePrefersReducedMotion();
   const monthlyMetrics = toMonthlyMetrics(result.months);
 
   if (monthlyMetrics.length === 0) {
@@ -182,6 +203,7 @@ export function QueryResults({ result }: QueryResultsProps) {
               />
               <Legend />
               <Line
+                isAnimationActive={!prefersReducedMotion}
                 dataKey="admissions"
                 name={t("admissions")}
                 stroke="var(--primary)"
@@ -189,6 +211,7 @@ export function QueryResults({ result }: QueryResultsProps) {
                 type="monotone"
               />
               <Line
+                isAnimationActive={!prefersReducedMotion}
                 dataKey="dismissals"
                 name={t("dismissals")}
                 stroke="var(--comparison)"
@@ -211,7 +234,11 @@ export function QueryResults({ result }: QueryResultsProps) {
                 labelFormatter={formatTooltipMonth}
               />
               <ReferenceLine stroke="var(--muted-foreground)" y={0} />
-              <Bar dataKey="netBalance" name={t("netBalance")}>
+              <Bar
+                dataKey="netBalance"
+                isAnimationActive={!prefersReducedMotion}
+                name={t("netBalance")}
+              >
                 {monthlyMetrics.map((metrics) => (
                   <Cell
                     fill={metrics.netBalance >= 0 ? "var(--positive)" : "var(--negative)"}
@@ -234,6 +261,7 @@ export function QueryResults({ result }: QueryResultsProps) {
                 labelFormatter={formatTooltipMonth}
               />
               <Line
+                isAnimationActive={!prefersReducedMotion}
                 dataKey="avgSalary"
                 name={t("averageSalary")}
                 stroke="var(--primary)"

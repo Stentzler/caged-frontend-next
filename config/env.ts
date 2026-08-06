@@ -9,20 +9,17 @@ const environmentSchema = z.object({
   AWS_REGION: optionalEnvironmentValueSchema,
   CAGED_QUERY_LAMBDA_FUNCTION_NAME: optionalEnvironmentValueSchema,
   CAGED_QUERY_LAMBDA_URL: z.url().optional(),
-  CAGED_CBO_LAMBDA_FUNCTION_NAME: optionalEnvironmentValueSchema,
 });
 
 type ServerConfiguration =
   | {
       queryTransport: "function_url";
       queryLambdaUrl: string;
-      cboIntegrationStatus: "disabled" | "contract_pending";
     }
   | {
       queryTransport: "iam";
       awsRegion: string;
       queryLambdaFunctionName: string;
-      cboIntegrationStatus: "disabled" | "contract_pending";
     };
 
 export function getServerConfiguration(): ServerConfiguration {
@@ -33,9 +30,6 @@ export function getServerConfiguration(): ServerConfiguration {
   }
 
   const environment = parsedEnvironment.data;
-  const cboIntegrationStatus = environment.CAGED_CBO_LAMBDA_FUNCTION_NAME
-    ? "contract_pending"
-    : "disabled";
 
   if (process.env.NODE_ENV === "production") {
     if (environment.CAGED_QUERY_LAMBDA_URL !== undefined) {
@@ -53,7 +47,6 @@ export function getServerConfiguration(): ServerConfiguration {
       queryTransport: "iam",
       awsRegion: environment.AWS_REGION,
       queryLambdaFunctionName: environment.CAGED_QUERY_LAMBDA_FUNCTION_NAME,
-      cboIntegrationStatus,
     };
   }
 
@@ -64,6 +57,5 @@ export function getServerConfiguration(): ServerConfiguration {
   return {
     queryTransport: "function_url",
     queryLambdaUrl: environment.CAGED_QUERY_LAMBDA_URL,
-    cboIntegrationStatus,
   };
 }

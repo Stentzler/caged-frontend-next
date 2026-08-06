@@ -1,7 +1,12 @@
-import { useTranslations } from "next-intl";
+import { connection } from "next/server";
+import { getTranslations } from "next-intl/server";
+import { getPublicSiteConfiguration } from "@/config/public-site";
 
-export function Footer() {
-  const t = useTranslations("Footer");
+export async function Footer() {
+  await connection();
+
+  const t = await getTranslations("Footer");
+  const publicSite = getPublicSiteConfiguration();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -12,12 +17,21 @@ export function Footer() {
           <p>{t("copyright", { year: currentYear })}</p>
         </div>
         <div className="flex flex-col items-start gap-2 lg:items-end">
-          <a className="font-semibold text-[var(--primary)] underline-offset-4 hover:underline" href="https://pdet.mte.gov.br/novo-caged" rel="noreferrer" target="_blank">
-            {t("officialSource")}
-          </a>
-          <a className="font-semibold text-[var(--primary)] underline-offset-4 hover:underline" href="https://github.com/Stentzler" rel="noreferrer" target="_blank">
-            {t("github")}
-          </a>
+          {publicSite.officialSourceUrl !== undefined ? (
+            <a className="font-semibold text-[var(--primary)] underline-offset-4 hover:underline" href={publicSite.officialSourceUrl} rel="noreferrer" target="_blank">
+              {t("officialSource")}
+            </a>
+          ) : null}
+          {publicSite.githubUrl !== undefined ? (
+            <a className="font-semibold text-[var(--primary)] underline-offset-4 hover:underline" href={publicSite.githubUrl} rel="noreferrer" target="_blank">
+              {t("github")}
+            </a>
+          ) : null}
+          {publicSite.contactEmail !== undefined ? (
+            <a className="font-semibold text-[var(--primary)] underline-offset-4 hover:underline" href={`mailto:${publicSite.contactEmail}`}>
+              {t("contact")}
+            </a>
+          ) : null}
         </div>
       </div>
     </footer>

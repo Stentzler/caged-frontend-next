@@ -50,6 +50,7 @@
     "submitPending": "Querying data…",
     "errorInvalidInput": "Review the selected fields and try again.",
     "errorInvalidQuery": "This query is not available for the selected filters.",
+    "errorRateLimited": "Too many queries were made in a short time. Please wait a moment before trying again.",
     "errorUnavailable": "The data is temporarily unavailable. Try again shortly.",
     "errorUnexpected": "The data could not be queried right now. Try again shortly."
   },
@@ -98,7 +99,8 @@
     "disclaimer": "Independent experimental project. For official or authoritative use, consult the public Novo CAGED source.",
     "copyright": "© {year} DataEmpregos",
     "officialSource": "Official source",
-    "github": "GitHub"
+    "github": "GitHub",
+    "contact": "Contact"
   },
   "Status": {
     "loading": "Loading page…",

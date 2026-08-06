@@ -1,7 +1,12 @@
-import { useTranslations } from "next-intl";
+import { connection } from "next/server";
+import { getTranslations } from "next-intl/server";
+import { getPublicSiteConfiguration } from "@/config/public-site";
 
-export default function AboutPage() {
-  const t = useTranslations("About");
+export default async function AboutPage() {
+  await connection();
+
+  const t = await getTranslations("About");
+  const publicSite = getPublicSiteConfiguration();
   const statements = [
     "dataset",
     "grouping",
@@ -30,9 +35,11 @@ export default function AboutPage() {
             <p key={statement}>{t(statement)}</p>
           ))}
         </div>
-        <a className="inline-flex rounded-lg bg-[var(--primary)] px-4 py-2.5 text-sm font-semibold text-[var(--primary-foreground)]" href="https://pdet.mte.gov.br/novo-caged" rel="noreferrer" target="_blank">
-          {t("officialSource")}
-        </a>
+        {publicSite.officialSourceUrl !== undefined ? (
+          <a className="inline-flex rounded-lg bg-[var(--primary)] px-4 py-2.5 text-sm font-semibold text-[var(--primary-foreground)]" href={publicSite.officialSourceUrl} rel="noreferrer" target="_blank">
+            {t("officialSource")}
+          </a>
+        ) : null}
       </div>
     </section>
   );

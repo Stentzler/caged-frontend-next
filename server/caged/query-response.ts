@@ -15,6 +15,10 @@ export function parseQueryResponse(
     throw new CagedError("invalid_query");
   }
 
+  if (statusCode === 429) {
+    throw new CagedError("rate_limited");
+  }
+
   if (statusCode === 503) {
     throw new CagedError("unavailable");
   }

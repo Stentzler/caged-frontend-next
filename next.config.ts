@@ -3,6 +3,7 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
   devIndicators: false,
+  output: "standalone",
 };
 
 const withNextIntl = createNextIntlPlugin();

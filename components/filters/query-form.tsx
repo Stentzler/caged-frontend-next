@@ -47,6 +47,8 @@ function getActionErrorMessage(
       return t("errorInvalidInput");
     case "invalid_query":
       return t("errorInvalidQuery");
+    case "rate_limited":
+      return t("errorRateLimited");
     case "unavailable":
       return t("errorUnavailable");
     case "upstream_contract_error":
