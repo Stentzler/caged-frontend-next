@@ -1,0 +1,2498 @@
+[
+  {
+    "familyCode": "0101",
+    "familyTitle": "Oficiais generais das forças armadas"
+  },
+  {
+    "familyCode": "0102",
+    "familyTitle": "Oficiais das forças armadas"
+  },
+  {
+    "familyCode": "0103",
+    "familyTitle": "Praças das forças armadas"
+  },
+  {
+    "familyCode": "0201",
+    "familyTitle": "Oficiais superiores da polícia militar"
+  },
+  {
+    "familyCode": "0202",
+    "familyTitle": "Capitães da  polícia militar"
+  },
+  {
+    "familyCode": "0203",
+    "familyTitle": "Tenentes da polícia militar"
+  },
+  {
+    "familyCode": "0211",
+    "familyTitle": "Subtenentes e sargentos da policia militar"
+  },
+  {
+    "familyCode": "0212",
+    "familyTitle": "Cabos e soldados da polícia militar"
+  },
+  {
+    "familyCode": "0301",
+    "familyTitle": "Oficiais superiores do corpo de bombeiros militar"
+  },
+  {
+    "familyCode": "0302",
+    "familyTitle": "Oficiais intermediários do corpo de bombeiros militar"
+  },
+  {
+    "familyCode": "0303",
+    "familyTitle": "Tenentes do corpo de bombeiros militar"
+  },
+  {
+    "familyCode": "0311",
+    "familyTitle": "Subtenentes e sargentos do corpo de bombeiros militar"
+  },
+  {
+    "familyCode": "0312",
+    "familyTitle": "Cabos e soldados do corpo de bombeiros militar"
+  },
+  {
+    "familyCode": "1111",
+    "familyTitle": "Legisladores"
+  },
+  {
+    "familyCode": "1112",
+    "familyTitle": "Dirigentes gerais da administração pública"
+  },
+  {
+    "familyCode": "1113",
+    "familyTitle": "Magistrados"
+  },
+  {
+    "familyCode": "1114",
+    "familyTitle": "Dirigentes do serviço público"
+  },
+  {
+    "familyCode": "1115",
+    "familyTitle": "Gestores públicos"
+  },
+  {
+    "familyCode": "1130",
+    "familyTitle": "Dirigentes de povos indígenas, de quilombolas e caiçaras"
+  },
+  {
+    "familyCode": "1141",
+    "familyTitle": "Dirigentes de partidos políticos"
+  },
+  {
+    "familyCode": "1142",
+    "familyTitle": "Dirigentes e administradores de entidades patronais e dos trabalhadores e de outros interesses sócioeconômicos"
+  },
+  {
+    "familyCode": "1143",
+    "familyTitle": "Dirigentes e administradores de entidades religiosas"
+  },
+  {
+    "familyCode": "1144",
+    "familyTitle": "Dirigentes e administradores de organizações da sociedade civil sem fins lucrativos"
+  },
+  {
+    "familyCode": "1210",
+    "familyTitle": "Diretores gerais"
+  },
+  {
+    "familyCode": "1221",
+    "familyTitle": "Diretores de produção e operações em empresa agropecuária, pesqueira , aqüícola e florestal"
+  },
+  {
+    "familyCode": "1222",
+    "familyTitle": "Diretores de produção e operações em empresa da indústria extrativa, transformação e de serviços de utilidade pública"
+  },
+  {
+    "familyCode": "1223",
+    "familyTitle": "Diretores de operações de obras em empresa de construção"
+  },
+  {
+    "familyCode": "1224",
+    "familyTitle": "Diretores de operações em empresa do comércio"
+  },
+  {
+    "familyCode": "1225",
+    "familyTitle": "Diretores de serviços de turismo, de alojamento e de alimentação"
+  },
+  {
+    "familyCode": "1226",
+    "familyTitle": "Diretores de operações de serviços em empresa de armazenamento, de transporte e de telecomunicação"
+  },
+  {
+    "familyCode": "1227",
+    "familyTitle": "Diretores de operações de serviços em instituição de intermediação financeira"
+  },
+  {
+    "familyCode": "1231",
+    "familyTitle": "Diretores administrativos e financeiros"
+  },
+  {
+    "familyCode": "1232",
+    "familyTitle": "Diretores de recursos humanos e relações de trabalho"
+  },
+  {
+    "familyCode": "1233",
+    "familyTitle": "Diretores de comercialização e marketing"
+  },
+  {
+    "familyCode": "1234",
+    "familyTitle": "Diretores de suprimentos e afins"
+  },
+  {
+    "familyCode": "1236",
+    "familyTitle": "Diretores de tecnologia da informação"
+  },
+  {
+    "familyCode": "1237",
+    "familyTitle": "Diretores de pesquisa e desenvolvimento"
+  },
+  {
+    "familyCode": "1238",
+    "familyTitle": "Diretores de manutenção"
+  },
+  {
+    "familyCode": "1311",
+    "familyTitle": "Diretores e gerentes de operações em empresa de serviços pessoais, sociais e culturais"
+  },
+  {
+    "familyCode": "1312",
+    "familyTitle": "Gestores e especialistas de operações em empresas, secretarias e unidades de serviços de saúde"
+  },
+  {
+    "familyCode": "1313",
+    "familyTitle": "Diretores e gerentes de instituição de serviços educacionais"
+  },
+  {
+    "familyCode": "1411",
+    "familyTitle": "Gerentes de produção e operações em empresa agropecuária, pesqueira, aqüícola e florestal"
+  },
+  {
+    "familyCode": "1412",
+    "familyTitle": "Gerentes de produção e operações em empresa da indústria extrativa, de transformação e de serviços de utilidade pública"
+  },
+  {
+    "familyCode": "1413",
+    "familyTitle": "Gerentes de obras em empresa de construção"
+  },
+  {
+    "familyCode": "1414",
+    "familyTitle": "Gerentes de operações comerciais e de assistência técnica"
+  },
+  {
+    "familyCode": "1415",
+    "familyTitle": "Gerentes de operações de serviços em empresa de turismo, de alojamento e alimentação"
+  },
+  {
+    "familyCode": "1416",
+    "familyTitle": "Gerentes de operações de serviços em empresa de transporte, de comunicação e de logística (armazenagem e distribuição)"
+  },
+  {
+    "familyCode": "1417",
+    "familyTitle": "Gerentes de operações de serviços em instituição de intermediação financeira"
+  },
+  {
+    "familyCode": "1418",
+    "familyTitle": "Gerentes operacionais da aviação civil"
+  },
+  {
+    "familyCode": "1421",
+    "familyTitle": "Gerentes administrativos, financeiros, de riscos e afins"
+  },
+  {
+    "familyCode": "1422",
+    "familyTitle": "Gerentes de recursos humanos e de relações do trabalho"
+  },
+  {
+    "familyCode": "1423",
+    "familyTitle": "Gerentes de comercialização, marketing e comunicação"
+  },
+  {
+    "familyCode": "1424",
+    "familyTitle": "Gerentes de suprimentos e afins"
+  },
+  {
+    "familyCode": "1425",
+    "familyTitle": "Gerentes de tecnologia da informação"
+  },
+  {
+    "familyCode": "1426",
+    "familyTitle": "Gerentes de pesquisa e desenvolvimento e afins"
+  },
+  {
+    "familyCode": "1427",
+    "familyTitle": "Gerentes de manutenção e afins"
+  },
+  {
+    "familyCode": "2011",
+    "familyTitle": "Profissionais da biotecnologia"
+  },
+  {
+    "familyCode": "2012",
+    "familyTitle": "Profissionais da metrologia"
+  },
+  {
+    "familyCode": "2021",
+    "familyTitle": "Engenheiros de controle e automação, engenheiros mecatrônicos e afins"
+  },
+  {
+    "familyCode": "2030",
+    "familyTitle": "Pesquisadores das ciências biológicas"
+  },
+  {
+    "familyCode": "2031",
+    "familyTitle": "Pesquisadores das ciências naturais e exatas"
+  },
+  {
+    "familyCode": "2032",
+    "familyTitle": "Pesquisadores de engenharia e tecnologia"
+  },
+  {
+    "familyCode": "2033",
+    "familyTitle": "Pesquisadores das ciências da saúde"
+  },
+  {
+    "familyCode": "2034",
+    "familyTitle": "Pesquisadores das ciências da agricultura"
+  },
+  {
+    "familyCode": "2035",
+    "familyTitle": "Pesquisadores das ciências sociais e humanas"
+  },
+  {
+    "familyCode": "2041",
+    "familyTitle": "Peritos criminais e judiciais"
+  },
+  {
+    "familyCode": "2111",
+    "familyTitle": "Profissionais da matemática"
+  },
+  {
+    "familyCode": "2112",
+    "familyTitle": "Profissionais de estatística e afins"
+  },
+  {
+    "familyCode": "2122",
+    "familyTitle": "Engenheiros em computação"
+  },
+  {
+    "familyCode": "2123",
+    "familyTitle": "Administradores de tecnologia da informação"
+  },
+  {
+    "familyCode": "2124",
+    "familyTitle": "Analistas de tecnologia da informação"
+  },
+  {
+    "familyCode": "2131",
+    "familyTitle": "Físicos"
+  },
+  {
+    "familyCode": "2132",
+    "familyTitle": "Químicos"
+  },
+  {
+    "familyCode": "2133",
+    "familyTitle": "Profissionais das ciências atmosféricas e espaciais e de astronomia"
+  },
+  {
+    "familyCode": "2134",
+    "familyTitle": "Geólogos, oceanógrafos, geofísicos e afins"
+  },
+  {
+    "familyCode": "2140",
+    "familyTitle": "Engenheiros ambientais e afins"
+  },
+  {
+    "familyCode": "2141",
+    "familyTitle": "Arquitetos e urbanistas"
+  },
+  {
+    "familyCode": "2142",
+    "familyTitle": "Engenheiros civis e afins"
+  },
+  {
+    "familyCode": "2143",
+    "familyTitle": "Engenheiros eletricistas, eletrônicos e afins"
+  },
+  {
+    "familyCode": "2144",
+    "familyTitle": "Engenheiros mecânicos e afins"
+  },
+  {
+    "familyCode": "2145",
+    "familyTitle": "Engenheiros químicos e afins"
+  },
+  {
+    "familyCode": "2146",
+    "familyTitle": "Engenheiros metalurgistas, de materiais e afins"
+  },
+  {
+    "familyCode": "2147",
+    "familyTitle": "Engenheiros de minas e afins"
+  },
+  {
+    "familyCode": "2148",
+    "familyTitle": "Engenheiros agrimensores e engenheiros cartógrafos"
+  },
+  {
+    "familyCode": "2149",
+    "familyTitle": "Engenheiros de produção, qualidade, segurança e afins"
+  },
+  {
+    "familyCode": "2151",
+    "familyTitle": "Oficiais de convés e afins"
+  },
+  {
+    "familyCode": "2152",
+    "familyTitle": "Oficiais de máquinas da marinha mercante"
+  },
+  {
+    "familyCode": "2153",
+    "familyTitle": "Profissionais da pilotagem aeronáutica"
+  },
+  {
+    "familyCode": "2211",
+    "familyTitle": "Biólogos e afins"
+  },
+  {
+    "familyCode": "2212",
+    "familyTitle": "Biomédicos"
+  },
+  {
+    "familyCode": "2221",
+    "familyTitle": "Engenheiros agrossilvipecuários"
+  },
+  {
+    "familyCode": "2222",
+    "familyTitle": "Engenheiros de alimentos e afins"
+  },
+  {
+    "familyCode": "2232",
+    "familyTitle": "Cirurgiões-dentistas"
+  },
+  {
+    "familyCode": "2233",
+    "familyTitle": "Veterinários e zootecnistas"
+  },
+  {
+    "familyCode": "2234",
+    "familyTitle": "Farmacêuticos"
+  },
+  {
+    "familyCode": "2235",
+    "familyTitle": "Enfermeiros e afins"
+  },
+  {
+    "familyCode": "2236",
+    "familyTitle": "Fisioterapeutas"
+  },
+  {
+    "familyCode": "2237",
+    "familyTitle": "Nutricionistas"
+  },
+  {
+    "familyCode": "2238",
+    "familyTitle": "Fonoaudiólogos"
+  },
+  {
+    "familyCode": "2239",
+    "familyTitle": "Terapeutas ocupacionais, ortoptistas e psicomotricistas"
+  },
+  {
+    "familyCode": "2241",
+    "familyTitle": "Profissionais da educação física"
+  },
+  {
+    "familyCode": "2251",
+    "familyTitle": "Médicos clínicos"
+  },
+  {
+    "familyCode": "2252",
+    "familyTitle": "Médicos em especialidades cirúrgicas"
+  },
+  {
+    "familyCode": "2253",
+    "familyTitle": "Médicos em medicina diagnóstica e terapêutica"
+  },
+  {
+    "familyCode": "2261",
+    "familyTitle": "Osteopatas e quiropraxistas"
+  },
+  {
+    "familyCode": "2263",
+    "familyTitle": "Profissionais das terapias criativas,equoterápicas e naturológicas"
+  },
+  {
+    "familyCode": "2311",
+    "familyTitle": "Professores de nível superior na educação infantil"
+  },
+  {
+    "familyCode": "2312",
+    "familyTitle": "Professores de nível superior do ensino fundamental (primeira a quarta séries)"
+  },
+  {
+    "familyCode": "2313",
+    "familyTitle": "Professores de nível superior no ensino fundamental de quinta a oitava série"
+  },
+  {
+    "familyCode": "2321",
+    "familyTitle": "Professores do ensino médio"
+  },
+  {
+    "familyCode": "2331",
+    "familyTitle": "Professores do ensino profissional"
+  },
+  {
+    "familyCode": "2332",
+    "familyTitle": "Instrutores de ensino profissional"
+  },
+  {
+    "familyCode": "2341",
+    "familyTitle": "Professores de matemática, estatística e informática do ensino superior"
+  },
+  {
+    "familyCode": "2342",
+    "familyTitle": "Professores de ciências físicas, químicas e afins do ensino superior"
+  },
+  {
+    "familyCode": "2343",
+    "familyTitle": "Professores de arquitetura e urbanismo, engenharia, geofísica e geologia do ensino superior"
+  },
+  {
+    "familyCode": "2344",
+    "familyTitle": "Professores de ciências biológicas e da saúde do ensino superior"
+  },
+  {
+    "familyCode": "2345",
+    "familyTitle": "Professores na área de formação pedagógica do ensino superior"
+  },
+  {
+    "familyCode": "2346",
+    "familyTitle": "Professores nas áreas de língua e literatura do ensino superior"
+  },
+  {
+    "familyCode": "2347",
+    "familyTitle": "Professores de ciências humanas do ensino superior"
+  },
+  {
+    "familyCode": "2348",
+    "familyTitle": "Professores de ciências econômicas, administrativas e contábeis do ensino superior"
+  },
+  {
+    "familyCode": "2349",
+    "familyTitle": "Professores de artes do ensino superior"
+  },
+  {
+    "familyCode": "2392",
+    "familyTitle": "Professores de educação especial"
+  },
+  {
+    "familyCode": "2394",
+    "familyTitle": "Programadores, avaliadores e orientadores de ensino"
+  },
+  {
+    "familyCode": "2410",
+    "familyTitle": "Advogados"
+  },
+  {
+    "familyCode": "2412",
+    "familyTitle": "Procuradores e advogados públicos"
+  },
+  {
+    "familyCode": "2413",
+    "familyTitle": "Tabeliães e registradores"
+  },
+  {
+    "familyCode": "2414",
+    "familyTitle": "Conselheiros julgadores"
+  },
+  {
+    "familyCode": "2422",
+    "familyTitle": "Membros do ministério público"
+  },
+  {
+    "familyCode": "2423",
+    "familyTitle": "Delegados de polícia"
+  },
+  {
+    "familyCode": "2424",
+    "familyTitle": "Defensores públicos e procuradores da assistência judiciária"
+  },
+  {
+    "familyCode": "2429",
+    "familyTitle": "Profissionais da inteligência"
+  },
+  {
+    "familyCode": "2511",
+    "familyTitle": "Profissionais em pesquisa e análise antropológica sociológica"
+  },
+  {
+    "familyCode": "2512",
+    "familyTitle": "Economistas"
+  },
+  {
+    "familyCode": "2513",
+    "familyTitle": "Profissionais em pesquisa e análise geográfica"
+  },
+  {
+    "familyCode": "2514",
+    "familyTitle": "Filósofos"
+  },
+  {
+    "familyCode": "2515",
+    "familyTitle": "Psicólogos e psicanalistas"
+  },
+  {
+    "familyCode": "2516",
+    "familyTitle": "Assistentes sociais e economistas domésticos"
+  },
+  {
+    "familyCode": "2521",
+    "familyTitle": "Administradores"
+  },
+  {
+    "familyCode": "2522",
+    "familyTitle": "Contadores e afins"
+  },
+  {
+    "familyCode": "2523",
+    "familyTitle": "Secretárias(os) executivas(os) e afins"
+  },
+  {
+    "familyCode": "2524",
+    "familyTitle": "Profissionais de recursos humanos"
+  },
+  {
+    "familyCode": "2525",
+    "familyTitle": "Profissionais de administração ecônomico-financeira"
+  },
+  {
+    "familyCode": "2526",
+    "familyTitle": "Profissionais da administração dos serviços de segurança"
+  },
+  {
+    "familyCode": "2527",
+    "familyTitle": "Profissionais de planejamento, programação e controles logisticos"
+  },
+  {
+    "familyCode": "2531",
+    "familyTitle": "Profissionais de publicidade"
+  },
+  {
+    "familyCode": "2532",
+    "familyTitle": "Profissionais de comercializacão e consultoria de serviços bancários"
+  },
+  {
+    "familyCode": "2533",
+    "familyTitle": "Corretores de valores, ativos financeiros, mercadorias e derivativos"
+  },
+  {
+    "familyCode": "2534",
+    "familyTitle": "Profissionais de mídias digitais e afins"
+  },
+  {
+    "familyCode": "2541",
+    "familyTitle": "Auditores fiscais e técnicos da receita federal"
+  },
+  {
+    "familyCode": "2542",
+    "familyTitle": "Auditores fiscais da previdência social"
+  },
+  {
+    "familyCode": "2543",
+    "familyTitle": "Auditores fiscais do trabalho"
+  },
+  {
+    "familyCode": "2544",
+    "familyTitle": "Fiscais de tributos estaduais e municipais"
+  },
+  {
+    "familyCode": "2545",
+    "familyTitle": "Profissionais da fiscalização de atividades urbanas"
+  },
+  {
+    "familyCode": "2611",
+    "familyTitle": "Profissionais do jornalismo"
+  },
+  {
+    "familyCode": "2612",
+    "familyTitle": "Profissionais da informação"
+  },
+  {
+    "familyCode": "2613",
+    "familyTitle": "Arquivistas e museólogos"
+  },
+  {
+    "familyCode": "2614",
+    "familyTitle": "Filólogos,tradutores ,intérpretes e afins"
+  },
+  {
+    "familyCode": "2615",
+    "familyTitle": "Profissionais da escrita"
+  },
+  {
+    "familyCode": "2616",
+    "familyTitle": "Editores"
+  },
+  {
+    "familyCode": "2617",
+    "familyTitle": "Locutores, comentaristas e repórteres de mídias audiovisuais"
+  },
+  {
+    "familyCode": "2618",
+    "familyTitle": "Fotógrafos profissionais"
+  },
+  {
+    "familyCode": "2619",
+    "familyTitle": "Assistentes de direção (tv) e continuístas"
+  },
+  {
+    "familyCode": "2621",
+    "familyTitle": "Produtores artísticos e culturais"
+  },
+  {
+    "familyCode": "2622",
+    "familyTitle": "Diretores de espetáculos e afins"
+  },
+  {
+    "familyCode": "2623",
+    "familyTitle": "Cenógrafos"
+  },
+  {
+    "familyCode": "2624",
+    "familyTitle": "Artistas visuais,desenhistas industriais e conservadores-restauradores de bens culturais"
+  },
+  {
+    "familyCode": "2625",
+    "familyTitle": "Atores"
+  },
+  {
+    "familyCode": "2626",
+    "familyTitle": "Músicos compositores, arranjadores, regentes e musicólogos"
+  },
+  {
+    "familyCode": "2627",
+    "familyTitle": "Músicos intérpretes"
+  },
+  {
+    "familyCode": "2628",
+    "familyTitle": "Artistas da dança (exceto dança tradicional e popular)"
+  },
+  {
+    "familyCode": "2629",
+    "familyTitle": "Designer de interiores de nível superior"
+  },
+  {
+    "familyCode": "2631",
+    "familyTitle": "Ministros de culto, missionários, teólogos e profissionais assemelhados"
+  },
+  {
+    "familyCode": "2711",
+    "familyTitle": "Chefes de cozinha e afins"
+  },
+  {
+    "familyCode": "3001",
+    "familyTitle": "Técnicos em mecatrônica"
+  },
+  {
+    "familyCode": "3003",
+    "familyTitle": "Técnicos em eletromecânica"
+  },
+  {
+    "familyCode": "3011",
+    "familyTitle": "Técnicos de laboratório industrial"
+  },
+  {
+    "familyCode": "3012",
+    "familyTitle": "Técnicos de apoio à bioengenharia"
+  },
+  {
+    "familyCode": "3111",
+    "familyTitle": "Técnicos químicos"
+  },
+  {
+    "familyCode": "3112",
+    "familyTitle": "Técnicos de produção de indústrias químicas, petroquímicas, refino de petróleo, gás e afins"
+  },
+  {
+    "familyCode": "3113",
+    "familyTitle": "Técnicos em materiais, produtos cerâmicos e vidros"
+  },
+  {
+    "familyCode": "3114",
+    "familyTitle": "Técnicos em fabricação de produtos plásticos e de borracha"
+  },
+  {
+    "familyCode": "3115",
+    "familyTitle": "Técnicos em controle ambiental, utilidades e tratamento de efluentes"
+  },
+  {
+    "familyCode": "3116",
+    "familyTitle": "Técnicos têxteis"
+  },
+  {
+    "familyCode": "3117",
+    "familyTitle": "Coloristas"
+  },
+  {
+    "familyCode": "3121",
+    "familyTitle": "Técnicos em construção civil (edificações)"
+  },
+  {
+    "familyCode": "3122",
+    "familyTitle": "Técnicos em construção civil (obras de infraestrutura)"
+  },
+  {
+    "familyCode": "3123",
+    "familyTitle": "Técnicos em geomática"
+  },
+  {
+    "familyCode": "3131",
+    "familyTitle": "Técnicos em eletricidade e eletrotécnica"
+  },
+  {
+    "familyCode": "3132",
+    "familyTitle": "Técnicos em eletrônica"
+  },
+  {
+    "familyCode": "3133",
+    "familyTitle": "Técnicos em telecomunicações"
+  },
+  {
+    "familyCode": "3134",
+    "familyTitle": "Técnicos em calibração e instrumentação"
+  },
+  {
+    "familyCode": "3135",
+    "familyTitle": "Técnicos em fotônica"
+  },
+  {
+    "familyCode": "3141",
+    "familyTitle": "Técnicos mecânicos na fabricação e montagem de máquinas, sistemas e instrumentos"
+  },
+  {
+    "familyCode": "3142",
+    "familyTitle": "Técnicos mecânicos (ferramentas)"
+  },
+  {
+    "familyCode": "3143",
+    "familyTitle": "Técnicos em mecânica veicular"
+  },
+  {
+    "familyCode": "3144",
+    "familyTitle": "Técnicos mecânicos na manutenção de máquinas, sistemas e instrumentos"
+  },
+  {
+    "familyCode": "3146",
+    "familyTitle": "Técnicos em metalurgia (estruturas metálicas)"
+  },
+  {
+    "familyCode": "3147",
+    "familyTitle": "Técnicos em siderurgia"
+  },
+  {
+    "familyCode": "3148",
+    "familyTitle": "Especialistas em inspeções industriais"
+  },
+  {
+    "familyCode": "3161",
+    "familyTitle": "Técnicos em geologia"
+  },
+  {
+    "familyCode": "3163",
+    "familyTitle": "Técnicos em mineração"
+  },
+  {
+    "familyCode": "3171",
+    "familyTitle": "Técnicos de desenvolvimento de sistemas e aplicações"
+  },
+  {
+    "familyCode": "3172",
+    "familyTitle": "Técnicos de suporte e monitoração ao usuário de tecnologia da informação."
+  },
+  {
+    "familyCode": "3180",
+    "familyTitle": "Desenhistas técnicos, em geral"
+  },
+  {
+    "familyCode": "3181",
+    "familyTitle": "Desenhistas técnicos da construção civil e arquitetura"
+  },
+  {
+    "familyCode": "3182",
+    "familyTitle": "Desenhistas técnicos da mecânica"
+  },
+  {
+    "familyCode": "3183",
+    "familyTitle": "Desenhistas técnicos em eletricidade, eletrônica, eletromecânica, calefação, ventilação e refrigeração"
+  },
+  {
+    "familyCode": "3184",
+    "familyTitle": "Desenhistas técnicos de produtos e serviços diversos"
+  },
+  {
+    "familyCode": "3185",
+    "familyTitle": "Desenhistas projetistas de construção civil e arquitetura"
+  },
+  {
+    "familyCode": "3186",
+    "familyTitle": "Desenhistas projetistas da mecânica"
+  },
+  {
+    "familyCode": "3187",
+    "familyTitle": "Desenhistas projetistas da eletrônica"
+  },
+  {
+    "familyCode": "3188",
+    "familyTitle": "Desenhistas projetistas e modelistas de produtos e serviços diversos"
+  },
+  {
+    "familyCode": "3191",
+    "familyTitle": "Técnicos do vestuário"
+  },
+  {
+    "familyCode": "3192",
+    "familyTitle": "Técnicos do mobiliário e afins"
+  },
+  {
+    "familyCode": "3201",
+    "familyTitle": "Técnicos em biologia"
+  },
+  {
+    "familyCode": "3211",
+    "familyTitle": "Técnicos agrícolas"
+  },
+  {
+    "familyCode": "3212",
+    "familyTitle": "Técnicos florestais"
+  },
+  {
+    "familyCode": "3213",
+    "familyTitle": "Técnicos em aqüicultura"
+  },
+  {
+    "familyCode": "3221",
+    "familyTitle": "Tecnólogos e técnicos em terapias complementares e estéticas"
+  },
+  {
+    "familyCode": "3222",
+    "familyTitle": "Técnicos e auxiliares de enfermagem"
+  },
+  {
+    "familyCode": "3223",
+    "familyTitle": "Técnicos em óptica e optometria"
+  },
+  {
+    "familyCode": "3224",
+    "familyTitle": "Técnicos de odontologia"
+  },
+  {
+    "familyCode": "3225",
+    "familyTitle": "Técnicos em próteses ortopédicas"
+  },
+  {
+    "familyCode": "3226",
+    "familyTitle": "Técnicos de imobilizações ortopédicas"
+  },
+  {
+    "familyCode": "3231",
+    "familyTitle": "Técnicos em pecuária"
+  },
+  {
+    "familyCode": "3241",
+    "familyTitle": "Tecnólogos e técnicos em métodos de diagnósticos e terapêutica"
+  },
+  {
+    "familyCode": "3242",
+    "familyTitle": "Técnicos de laboratórios de saúde e bancos de sangue"
+  },
+  {
+    "familyCode": "3250",
+    "familyTitle": "Enólogos, perfumistas e aromistas"
+  },
+  {
+    "familyCode": "3251",
+    "familyTitle": "Técnico em farmácia e em manipulação farmacêutica"
+  },
+  {
+    "familyCode": "3252",
+    "familyTitle": "Técnicos em produção, conservação  e de qualidade de alimentos"
+  },
+  {
+    "familyCode": "3253",
+    "familyTitle": "Técnicos de apoio à biotecnologia"
+  },
+  {
+    "familyCode": "3281",
+    "familyTitle": "Técnicos em necrópsia e taxidermistas"
+  },
+  {
+    "familyCode": "3311",
+    "familyTitle": "Professores de nível médio na educação infantil"
+  },
+  {
+    "familyCode": "3312",
+    "familyTitle": "Professores de nível médio no ensino fundamental"
+  },
+  {
+    "familyCode": "3313",
+    "familyTitle": "Professores de nível médio no ensino profissionalizante"
+  },
+  {
+    "familyCode": "3321",
+    "familyTitle": "Professores leigos no ensino fundamental"
+  },
+  {
+    "familyCode": "3322",
+    "familyTitle": "Professores práticos no ensino profissionalizante"
+  },
+  {
+    "familyCode": "3331",
+    "familyTitle": "Instrutores e professores de cursos livres"
+  },
+  {
+    "familyCode": "3341",
+    "familyTitle": "Inspetores de alunos e afins"
+  },
+  {
+    "familyCode": "3411",
+    "familyTitle": "Pilotos de aviação comercial, mecânicos de vôo e afins"
+  },
+  {
+    "familyCode": "3412",
+    "familyTitle": "Técnicos marítimos, fluviários e pescadores de convés"
+  },
+  {
+    "familyCode": "3413",
+    "familyTitle": "Técnicos marítimos e fluviários de máquinas"
+  },
+  {
+    "familyCode": "3421",
+    "familyTitle": "Especialistas em logística de transportes"
+  },
+  {
+    "familyCode": "3422",
+    "familyTitle": "Despachantes aduaneiros"
+  },
+  {
+    "familyCode": "3423",
+    "familyTitle": "Técnicos em transportes rodoviários"
+  },
+  {
+    "familyCode": "3424",
+    "familyTitle": "Técnicos em transportes metroferroviários"
+  },
+  {
+    "familyCode": "3425",
+    "familyTitle": "Técnicos em transportes aéreos"
+  },
+  {
+    "familyCode": "3426",
+    "familyTitle": "Técnicos em transportes por vias navegáveis e operações portuárias"
+  },
+  {
+    "familyCode": "3511",
+    "familyTitle": "Técnicos em contabilidade"
+  },
+  {
+    "familyCode": "3513",
+    "familyTitle": "Técnicos em administração"
+  },
+  {
+    "familyCode": "3514",
+    "familyTitle": "Serventuários da justiça e afins"
+  },
+  {
+    "familyCode": "3515",
+    "familyTitle": "Técnicos em secretariado, taquígrafos e estenotipistas"
+  },
+  {
+    "familyCode": "3516",
+    "familyTitle": "Técnicos em segurança do trabalho"
+  },
+  {
+    "familyCode": "3517",
+    "familyTitle": "Técnicos de seguros e afins"
+  },
+  {
+    "familyCode": "3518",
+    "familyTitle": "Agentes de investigação e identificação"
+  },
+  {
+    "familyCode": "3519",
+    "familyTitle": "Técnicos da inteligência"
+  },
+  {
+    "familyCode": "3522",
+    "familyTitle": "Agentes da saúde e do meio ambiente"
+  },
+  {
+    "familyCode": "3523",
+    "familyTitle": "Agentes  fiscais metrológicos e de qualidade"
+  },
+  {
+    "familyCode": "3524",
+    "familyTitle": "Profissionais de direitos autorais e de avaliacão de produtos dos meios de comunicação"
+  },
+  {
+    "familyCode": "3532",
+    "familyTitle": "Técnicos em operações e serviços bancários"
+  },
+  {
+    "familyCode": "3541",
+    "familyTitle": "Especialistas em promoção de produtos e vendas"
+  },
+  {
+    "familyCode": "3542",
+    "familyTitle": "Compradores"
+  },
+  {
+    "familyCode": "3543",
+    "familyTitle": "Analistas de comércio exterior"
+  },
+  {
+    "familyCode": "3544",
+    "familyTitle": "Leiloeiros e avaliadores"
+  },
+  {
+    "familyCode": "3545",
+    "familyTitle": "Corretores de seguros"
+  },
+  {
+    "familyCode": "3546",
+    "familyTitle": "Corretores de imóveis e de grãos"
+  },
+  {
+    "familyCode": "3547",
+    "familyTitle": "Representantes comerciais autônomos"
+  },
+  {
+    "familyCode": "3548",
+    "familyTitle": "Técnicos em serviços de turismo e organização de eventos"
+  },
+  {
+    "familyCode": "3711",
+    "familyTitle": "Técnicos em biblioteconomia"
+  },
+  {
+    "familyCode": "3712",
+    "familyTitle": "Técnicos em museologia e afins"
+  },
+  {
+    "familyCode": "3713",
+    "familyTitle": "Técnicos em artes gráficas"
+  },
+  {
+    "familyCode": "3714",
+    "familyTitle": "Recreadores"
+  },
+  {
+    "familyCode": "3721",
+    "familyTitle": "Captadores de imagens em movimento"
+  },
+  {
+    "familyCode": "3722",
+    "familyTitle": "Operadores de rede de teleprocessamento e afins"
+  },
+  {
+    "familyCode": "3731",
+    "familyTitle": "Técnicos de operação de registros sonoro/audiovisuais"
+  },
+  {
+    "familyCode": "3732",
+    "familyTitle": "Supervisores operacionais e técnicos em mídias audiovisuais"
+  },
+  {
+    "familyCode": "3741",
+    "familyTitle": "Técnicos em áudio"
+  },
+  {
+    "familyCode": "3742",
+    "familyTitle": "Técnicos em cenografia"
+  },
+  {
+    "familyCode": "3743",
+    "familyTitle": "Técnicos em operação de aparelhos de projeção"
+  },
+  {
+    "familyCode": "3744",
+    "familyTitle": "Técnicos em montagem, edição e finalização de mídia audiovisual"
+  },
+  {
+    "familyCode": "3751",
+    "familyTitle": "Designers de interiores, de vitrines e visual merchandiser e afins (nível médio)"
+  },
+  {
+    "familyCode": "3761",
+    "familyTitle": "Dançarinos tradicionais e populares"
+  },
+  {
+    "familyCode": "3762",
+    "familyTitle": "Artistas de circo (circenses)"
+  },
+  {
+    "familyCode": "3763",
+    "familyTitle": "Apresentadores de eventos, programas e espetáculos"
+  },
+  {
+    "familyCode": "3764",
+    "familyTitle": "Modelos"
+  },
+  {
+    "familyCode": "3771",
+    "familyTitle": "Atletas profissionais"
+  },
+  {
+    "familyCode": "3772",
+    "familyTitle": "Árbitros desportivos"
+  },
+  {
+    "familyCode": "3911",
+    "familyTitle": "Planejadores, programadores e controladores de produção e manutenção"
+  },
+  {
+    "familyCode": "3912",
+    "familyTitle": "Técnicos de controle da produção"
+  },
+  {
+    "familyCode": "3951",
+    "familyTitle": "Técnicos de apoio em pesquisa e desenvolvimento"
+  },
+  {
+    "familyCode": "4101",
+    "familyTitle": "Supervisores administrativos"
+  },
+  {
+    "familyCode": "4102",
+    "familyTitle": "Supervisores de serviços financeiros, de câmbio e de controle"
+  },
+  {
+    "familyCode": "4110",
+    "familyTitle": "Agentes, assistentes e auxiliares administrativos"
+  },
+  {
+    "familyCode": "4121",
+    "familyTitle": "Operadores de equipamentos de entrada e transmissão de dados"
+  },
+  {
+    "familyCode": "4122",
+    "familyTitle": "Contínuos"
+  },
+  {
+    "familyCode": "4131",
+    "familyTitle": "Auxiliares de contabilidade"
+  },
+  {
+    "familyCode": "4132",
+    "familyTitle": "Escriturários de serviços bancários"
+  },
+  {
+    "familyCode": "4141",
+    "familyTitle": "Almoxarifes e armazenistas"
+  },
+  {
+    "familyCode": "4142",
+    "familyTitle": "Apontadores e conferentes"
+  },
+  {
+    "familyCode": "4151",
+    "familyTitle": "Auxiliares de serviços de documentação, informação e pesquisa"
+  },
+  {
+    "familyCode": "4152",
+    "familyTitle": "Trabalhadores nos serviços de classificação e entregas de correspondências, encomendas e publicações"
+  },
+  {
+    "familyCode": "4153",
+    "familyTitle": "Trabalhadores em registros e informações em saúde"
+  },
+  {
+    "familyCode": "4201",
+    "familyTitle": "Supervisores de atendimento ao público e de pesquisa"
+  },
+  {
+    "familyCode": "4211",
+    "familyTitle": "Caixas e bilheteiros (exceto caixa de banco)"
+  },
+  {
+    "familyCode": "4212",
+    "familyTitle": "Coletadores de apostas e de jogos"
+  },
+  {
+    "familyCode": "4213",
+    "familyTitle": "Cobradores e afins"
+  },
+  {
+    "familyCode": "4221",
+    "familyTitle": "Recepcionistas"
+  },
+  {
+    "familyCode": "4222",
+    "familyTitle": "Operadores de telefonia"
+  },
+  {
+    "familyCode": "4223",
+    "familyTitle": "Operadores de telemarketing e afins"
+  },
+  {
+    "familyCode": "4231",
+    "familyTitle": "Despachantes documentalistas e afins"
+  },
+  {
+    "familyCode": "4241",
+    "familyTitle": "Entrevistadores e recenseadores"
+  },
+  {
+    "familyCode": "4242",
+    "familyTitle": "Aplicadores de provas e afins"
+  },
+  {
+    "familyCode": "5101",
+    "familyTitle": "Supervisores dos serviços de transporte, turismo, hotelaria e administração de edifícios"
+  },
+  {
+    "familyCode": "5102",
+    "familyTitle": "Supervisores de lavanderia"
+  },
+  {
+    "familyCode": "5103",
+    "familyTitle": "Supervisores dos serviços de proteção, segurança e outros"
+  },
+  {
+    "familyCode": "5111",
+    "familyTitle": "Trabalhadores de segurança e atendimento aos usuários nos transportes"
+  },
+  {
+    "familyCode": "5112",
+    "familyTitle": "Fiscais e cobradores dos transportes coletivos"
+  },
+  {
+    "familyCode": "5114",
+    "familyTitle": "Guias de turismo"
+  },
+  {
+    "familyCode": "5115",
+    "familyTitle": "Condutores de turismo"
+  },
+  {
+    "familyCode": "5121",
+    "familyTitle": "Trabalhadores dos serviços domésticos em geral"
+  },
+  {
+    "familyCode": "5131",
+    "familyTitle": "Mordomos e governantas"
+  },
+  {
+    "familyCode": "5132",
+    "familyTitle": "Cozinheiros"
+  },
+  {
+    "familyCode": "5133",
+    "familyTitle": "Camareiros, roupeiros e afins"
+  },
+  {
+    "familyCode": "5134",
+    "familyTitle": "Trabalhadores no atendimento em estabelecimentos de serviços de alimentação, bebidas e hotelaria"
+  },
+  {
+    "familyCode": "5135",
+    "familyTitle": "Trabalhadores auxiliares nos serviços de alimentação"
+  },
+  {
+    "familyCode": "5136",
+    "familyTitle": "Churrasqueiros, pizzaiolos e sushimen"
+  },
+  {
+    "familyCode": "5141",
+    "familyTitle": "Trabalhadores nos serviços de administração de edifícios"
+  },
+  {
+    "familyCode": "5142",
+    "familyTitle": "Trabalhadores nos serviços de coleta de resíduos, de limpeza e conservação de áreas públicas"
+  },
+  {
+    "familyCode": "5143",
+    "familyTitle": "Trabalhadores nos  serviços de manutenção de edificações"
+  },
+  {
+    "familyCode": "5151",
+    "familyTitle": "Trabalhadores em serviços de promoção e apoio à saúde"
+  },
+  {
+    "familyCode": "5152",
+    "familyTitle": "Auxiliares de laboratório da saúde"
+  },
+  {
+    "familyCode": "5153",
+    "familyTitle": "Trabalhadores de atenção, defesa e proteção a pessoas em situação de risco e adolescentes em conflito com a lei"
+  },
+  {
+    "familyCode": "5161",
+    "familyTitle": "Trabalhadores nos serviços de embelezamento e higiene"
+  },
+  {
+    "familyCode": "5162",
+    "familyTitle": "Cuidadores de crianças, jovens, adultos e idosos"
+  },
+  {
+    "familyCode": "5163",
+    "familyTitle": "Tintureiros, lavadeiros e afins, a máquina"
+  },
+  {
+    "familyCode": "5164",
+    "familyTitle": "Lavadores e passadores de roupa, a mão"
+  },
+  {
+    "familyCode": "5165",
+    "familyTitle": "Trabalhadores dos serviços funerários"
+  },
+  {
+    "familyCode": "5166",
+    "familyTitle": "Trabalhadores auxiliares dos serviços funerários"
+  },
+  {
+    "familyCode": "5167",
+    "familyTitle": "Astrólogos e numerólogos"
+  },
+  {
+    "familyCode": "5168",
+    "familyTitle": "Esotéricos e paranormais"
+  },
+  {
+    "familyCode": "5169",
+    "familyTitle": "Trabalhadores nos serviços de arte corporal"
+  },
+  {
+    "familyCode": "5171",
+    "familyTitle": "Bombeiros, salva-vidas e afins"
+  },
+  {
+    "familyCode": "5172",
+    "familyTitle": "Policiais, guardas-civis municipais e agentes de trânsito"
+  },
+  {
+    "familyCode": "5173",
+    "familyTitle": "Vigilantes e guardas de segurança"
+  },
+  {
+    "familyCode": "5174",
+    "familyTitle": "Porteiros, vigias e afins"
+  },
+  {
+    "familyCode": "5191",
+    "familyTitle": "Motociclistas e ciclistas de entregas rápidas"
+  },
+  {
+    "familyCode": "5192",
+    "familyTitle": "Trabalhadores da coleta e seleção de material reciclável"
+  },
+  {
+    "familyCode": "5193",
+    "familyTitle": "Trabalhadores de serviços veterinários, de higiene e estética de animais domésticos"
+  },
+  {
+    "familyCode": "5198",
+    "familyTitle": "Profissionais do sexo"
+  },
+  {
+    "familyCode": "5199",
+    "familyTitle": "Outros trabalhadores dos serviços"
+  },
+  {
+    "familyCode": "5201",
+    "familyTitle": "Supervisores de vendas e de prestação de serviços"
+  },
+  {
+    "familyCode": "5211",
+    "familyTitle": "Operadores do comércio em lojas e mercados"
+  },
+  {
+    "familyCode": "5231",
+    "familyTitle": "Instaladores de produtos e acessórios"
+  },
+  {
+    "familyCode": "5241",
+    "familyTitle": "Vendedores em domicílio"
+  },
+  {
+    "familyCode": "5242",
+    "familyTitle": "Vendedores em bancas, quiosques e barracas"
+  },
+  {
+    "familyCode": "5243",
+    "familyTitle": "Vendedores ambulantes"
+  },
+  {
+    "familyCode": "6110",
+    "familyTitle": "Produtores agropecuários em geral"
+  },
+  {
+    "familyCode": "6120",
+    "familyTitle": "Produtores agrícolas polivalentes"
+  },
+  {
+    "familyCode": "6121",
+    "familyTitle": "Produtores agrícolas na cultura de gramíneas"
+  },
+  {
+    "familyCode": "6122",
+    "familyTitle": "Produtores agrícolas na cultura de plantas fibrosas"
+  },
+  {
+    "familyCode": "6123",
+    "familyTitle": "Produtores agrícolas na olericultura"
+  },
+  {
+    "familyCode": "6124",
+    "familyTitle": "Produtores agrícolas no cultivo de flores e plantas ornamentais"
+  },
+  {
+    "familyCode": "6125",
+    "familyTitle": "Produtores agrícolas na fruticultura"
+  },
+  {
+    "familyCode": "6126",
+    "familyTitle": "Produtores agrícolas na cultura de plantas estimulantes"
+  },
+  {
+    "familyCode": "6127",
+    "familyTitle": "Produtores agrícolas na cultura de plantas oleaginosas"
+  },
+  {
+    "familyCode": "6128",
+    "familyTitle": "Produtores de especiarias e de plantas aromáticas e medicinais"
+  },
+  {
+    "familyCode": "6130",
+    "familyTitle": "Produtores em pecuária polivalente"
+  },
+  {
+    "familyCode": "6131",
+    "familyTitle": "Produtores em pecuária de animais de grande porte"
+  },
+  {
+    "familyCode": "6132",
+    "familyTitle": "Produtores em pecuária de animais de médio porte"
+  },
+  {
+    "familyCode": "6133",
+    "familyTitle": "Produtores da avicultura e cunicultura"
+  },
+  {
+    "familyCode": "6134",
+    "familyTitle": "Produtores de animais e insetos úteis"
+  },
+  {
+    "familyCode": "6201",
+    "familyTitle": "Supervisores na exploração agropecuária"
+  },
+  {
+    "familyCode": "6210",
+    "familyTitle": "Trabalhadores agropecuários em geral"
+  },
+  {
+    "familyCode": "6220",
+    "familyTitle": "Trabalhadores de apoio à agricultura"
+  },
+  {
+    "familyCode": "6221",
+    "familyTitle": "Trabalhadores agrícolas na cultura de gramíneas"
+  },
+  {
+    "familyCode": "6222",
+    "familyTitle": "Trabalhadores agrícolas na cultura de plantas fibrosas"
+  },
+  {
+    "familyCode": "6223",
+    "familyTitle": "Trabalhadores agrícolas na olericultura"
+  },
+  {
+    "familyCode": "6224",
+    "familyTitle": "Trabalhadores agrícolas no cultivo de flores e plantas ornamentais"
+  },
+  {
+    "familyCode": "6225",
+    "familyTitle": "Trabalhadores agrícolas na fruticultura"
+  },
+  {
+    "familyCode": "6226",
+    "familyTitle": "Trabalhadores agrícolas nas culturas de plantas estimulantes"
+  },
+  {
+    "familyCode": "6227",
+    "familyTitle": "Trabalhadores agrícolas na cultura de plantas oleaginosas"
+  },
+  {
+    "familyCode": "6228",
+    "familyTitle": "Trabalhadores agrícolas da cultura de especiarias e de plantas aromáticas e medicinais"
+  },
+  {
+    "familyCode": "6230",
+    "familyTitle": "Tratadores polivalentes de animais"
+  },
+  {
+    "familyCode": "6231",
+    "familyTitle": "Trabalhadores na pecuária de animais de grande porte"
+  },
+  {
+    "familyCode": "6232",
+    "familyTitle": "Trabalhadores na pecuária de animais de médio porte"
+  },
+  {
+    "familyCode": "6233",
+    "familyTitle": "Trabalhadores na avicultura e cunicultura"
+  },
+  {
+    "familyCode": "6234",
+    "familyTitle": "Trabalhadores na criação de insetos e animais úteis"
+  },
+  {
+    "familyCode": "6301",
+    "familyTitle": "Supervisores na área florestal e aqüicultura"
+  },
+  {
+    "familyCode": "6310",
+    "familyTitle": "Pescadores polivalentes"
+  },
+  {
+    "familyCode": "6311",
+    "familyTitle": "Pescadores profissionais artesanais de água doce"
+  },
+  {
+    "familyCode": "6312",
+    "familyTitle": "Pescadores de água costeira e alto mar"
+  },
+  {
+    "familyCode": "6313",
+    "familyTitle": "Criadores de animais aquáticos"
+  },
+  {
+    "familyCode": "6314",
+    "familyTitle": "Trabalhadores de apoio à pesca"
+  },
+  {
+    "familyCode": "6320",
+    "familyTitle": "Trabalhadores florestais polivalentes"
+  },
+  {
+    "familyCode": "6321",
+    "familyTitle": "Extrativistas e reflorestadores de espécies produtoras de madeira"
+  },
+  {
+    "familyCode": "6322",
+    "familyTitle": "Extrativistas florestais de espécies produtoras de gomas e resinas"
+  },
+  {
+    "familyCode": "6323",
+    "familyTitle": "Extrativistas florestais de espécies produtoras de fibras, ceras e óleos"
+  },
+  {
+    "familyCode": "6324",
+    "familyTitle": "Extrativistas florestais de espécies produtoras de alimentos silvestres"
+  },
+  {
+    "familyCode": "6325",
+    "familyTitle": "Extrativistas florestais de espécies produtoras de substâncias aromáticas, medicinais e tóxicas"
+  },
+  {
+    "familyCode": "6326",
+    "familyTitle": "Carvoejadores"
+  },
+  {
+    "familyCode": "6410",
+    "familyTitle": "Trabalhadores da mecanização agrícola"
+  },
+  {
+    "familyCode": "6420",
+    "familyTitle": "Trabalhadores da mecanização florestal"
+  },
+  {
+    "familyCode": "6430",
+    "familyTitle": "Trabalhadores da irrigação e drenagem"
+  },
+  {
+    "familyCode": "7101",
+    "familyTitle": "Supervisores da extração mineral"
+  },
+  {
+    "familyCode": "7102",
+    "familyTitle": "Supervisores da construção civil"
+  },
+  {
+    "familyCode": "7111",
+    "familyTitle": "Trabalhadores da extração de minerais sólidos"
+  },
+  {
+    "familyCode": "7112",
+    "familyTitle": "Trabalhadores de extração de minerais sólidos (operadores de máquinas)"
+  },
+  {
+    "familyCode": "7113",
+    "familyTitle": "Trabalhadores da extração de minerais líquidos e gasosos"
+  },
+  {
+    "familyCode": "7114",
+    "familyTitle": "Garimpeiros e operadores de salinas"
+  },
+  {
+    "familyCode": "7121",
+    "familyTitle": "Trabalhadores de beneficiamento de minérios"
+  },
+  {
+    "familyCode": "7122",
+    "familyTitle": "Trabalhadores de beneficiamento de pedras ornamentais"
+  },
+  {
+    "familyCode": "7151",
+    "familyTitle": "Trabalhadores na operação de máquinas de terraplenagem e fundações"
+  },
+  {
+    "familyCode": "7152",
+    "familyTitle": "Trabalhadores de estruturas de alvenaria"
+  },
+  {
+    "familyCode": "7153",
+    "familyTitle": "Montadores de estruturas de concreto armado"
+  },
+  {
+    "familyCode": "7154",
+    "familyTitle": "Trabalhadores na operação de máquinas de concreto usinado e afins"
+  },
+  {
+    "familyCode": "7155",
+    "familyTitle": "Trabalhadores de montagem de estruturas de madeira, metal e compósitos em obras civis"
+  },
+  {
+    "familyCode": "7156",
+    "familyTitle": "Trabalhadores de instalações elétricas"
+  },
+  {
+    "familyCode": "7157",
+    "familyTitle": "Aplicadores de materiais isolantes"
+  },
+  {
+    "familyCode": "7161",
+    "familyTitle": "Revestidores de concreto"
+  },
+  {
+    "familyCode": "7162",
+    "familyTitle": "Telhadores (revestimentos rígidos)"
+  },
+  {
+    "familyCode": "7163",
+    "familyTitle": "Vidraceiros (revestimentos rígidos)"
+  },
+  {
+    "familyCode": "7164",
+    "familyTitle": "Gesseiros"
+  },
+  {
+    "familyCode": "7165",
+    "familyTitle": "Aplicadores de revestimentos cerâmicos, pastilhas, pedras e madeiras"
+  },
+  {
+    "familyCode": "7166",
+    "familyTitle": "Pintores de obras e revestidores de interiores (revestimentos flexíveis)"
+  },
+  {
+    "familyCode": "7170",
+    "familyTitle": "Ajudantes de obras civis"
+  },
+  {
+    "familyCode": "7201",
+    "familyTitle": "Supervisores de usinagem, conformação e tratamento de metais"
+  },
+  {
+    "familyCode": "7202",
+    "familyTitle": "Supervisores da fabricação e montagem metalmecânica"
+  },
+  {
+    "familyCode": "7211",
+    "familyTitle": "Ferramenteiros e afins"
+  },
+  {
+    "familyCode": "7212",
+    "familyTitle": "Preparadores e operadores de máquinas-ferramenta convencionais"
+  },
+  {
+    "familyCode": "7213",
+    "familyTitle": "Afiadores e polidores de metais"
+  },
+  {
+    "familyCode": "7214",
+    "familyTitle": "Operadores de máquinas de usinagem cnc"
+  },
+  {
+    "familyCode": "7221",
+    "familyTitle": "Trabalhadores de forjamento de metais"
+  },
+  {
+    "familyCode": "7222",
+    "familyTitle": "Trabalhadores de fundição de metais puros e de ligas metálicas"
+  },
+  {
+    "familyCode": "7223",
+    "familyTitle": "Trabalhadores de moldagem de metais e de ligas metálicas"
+  },
+  {
+    "familyCode": "7224",
+    "familyTitle": "Trabalhadores de trefilação e estiramento de metais puros e ligas metálicas"
+  },
+  {
+    "familyCode": "7231",
+    "familyTitle": "Trabalhadores de tratamento térmico de metais"
+  },
+  {
+    "familyCode": "7232",
+    "familyTitle": "Trabalhadores de tratamento de superfícies de metais e de compósitos (termoquímicos)"
+  },
+  {
+    "familyCode": "7233",
+    "familyTitle": "Trabalhadores da pintura de equipamentos, veículos, estruturas metálicas e de compósitos"
+  },
+  {
+    "familyCode": "7241",
+    "familyTitle": "Encanadores e instaladores de tubulações"
+  },
+  {
+    "familyCode": "7242",
+    "familyTitle": "Trabalhadores de traçagem e montagem de estruturas metálicas e de compósitos"
+  },
+  {
+    "familyCode": "7243",
+    "familyTitle": "Trabalhadores de soldagem e corte de ligas metálicas"
+  },
+  {
+    "familyCode": "7244",
+    "familyTitle": "Trabalhadores de caldeiraria e serralheria"
+  },
+  {
+    "familyCode": "7245",
+    "familyTitle": "Operadores de máquinas de conformação de metais"
+  },
+  {
+    "familyCode": "7246",
+    "familyTitle": "Trançadores e laceiros de cabos de aço"
+  },
+  {
+    "familyCode": "7250",
+    "familyTitle": "Ajustadores mecânicos polivalentes e afins"
+  },
+  {
+    "familyCode": "7251",
+    "familyTitle": "Montadores de máquinas, aparelhos e acessórios em linhas de montagem"
+  },
+  {
+    "familyCode": "7252",
+    "familyTitle": "Montadores de máquinas industriais"
+  },
+  {
+    "familyCode": "7253",
+    "familyTitle": "Montadores de máquinas pesadas e equipamentos agrícolas"
+  },
+  {
+    "familyCode": "7254",
+    "familyTitle": "Mecânicos montadores de motores e turboalimentadores"
+  },
+  {
+    "familyCode": "7255",
+    "familyTitle": "Montadores de veículos automotores (linha de montagem)"
+  },
+  {
+    "familyCode": "7256",
+    "familyTitle": "Montadores de sistemas e estruturas de aeronaves"
+  },
+  {
+    "familyCode": "7257",
+    "familyTitle": "Instaladores de equipamentos de refrigeração e ventilação"
+  },
+  {
+    "familyCode": "7301",
+    "familyTitle": "Supervisores de montagens e instalações eletroeletrônicas"
+  },
+  {
+    "familyCode": "7311",
+    "familyTitle": "Montadores de equipamentos eletroeletrônicos"
+  },
+  {
+    "familyCode": "7312",
+    "familyTitle": "Montadores de aparelhos de telecomunicações"
+  },
+  {
+    "familyCode": "7313",
+    "familyTitle": "Instaladores-reparadores de  linhas e equipamentos de telecomunicações"
+  },
+  {
+    "familyCode": "7321",
+    "familyTitle": "Instaladores e reparadores de linhas e cabos elétricos, telefônicos e de comunicação de dados"
+  },
+  {
+    "familyCode": "7401",
+    "familyTitle": "Supervisores da mecânica de precisão e instrumentos musicais"
+  },
+  {
+    "familyCode": "7411",
+    "familyTitle": "Mecânicos de instrumentos de precisão"
+  },
+  {
+    "familyCode": "7421",
+    "familyTitle": "Confeccionadores de instrumentos musicais"
+  },
+  {
+    "familyCode": "7501",
+    "familyTitle": "Supervisores de joalheria e afins"
+  },
+  {
+    "familyCode": "7502",
+    "familyTitle": "Supervisores de vidraria, cerâmica e afins"
+  },
+  {
+    "familyCode": "7510",
+    "familyTitle": "Joalheiros e lapidadores de gemas"
+  },
+  {
+    "familyCode": "7511",
+    "familyTitle": "Artesãos de metais preciosos e semi-preciosos"
+  },
+  {
+    "familyCode": "7521",
+    "familyTitle": "Sopradores, moldadores e modeladores de vidros e afins"
+  },
+  {
+    "familyCode": "7522",
+    "familyTitle": "Trabalhadores da transformação de vidros planos"
+  },
+  {
+    "familyCode": "7523",
+    "familyTitle": "Ceramistas (preparação e fabricação)"
+  },
+  {
+    "familyCode": "7524",
+    "familyTitle": "Vidreiros e ceramistas (arte e decoração)"
+  },
+  {
+    "familyCode": "7601",
+    "familyTitle": "Supervisores da indústria têxtil"
+  },
+  {
+    "familyCode": "7602",
+    "familyTitle": "Supervisores na indústria do curtimento"
+  },
+  {
+    "familyCode": "7603",
+    "familyTitle": "Supervisores na confecção do vestuário"
+  },
+  {
+    "familyCode": "7604",
+    "familyTitle": "Supervisores na confecção de calçados"
+  },
+  {
+    "familyCode": "7605",
+    "familyTitle": "Supervisores da confecção de artefatos de tecidos, couros e afins"
+  },
+  {
+    "familyCode": "7606",
+    "familyTitle": "Supervisores das artes gráficas"
+  },
+  {
+    "familyCode": "7610",
+    "familyTitle": "Trabalhadores polivalentes das indústrias têxteis"
+  },
+  {
+    "familyCode": "7611",
+    "familyTitle": "Trabalhadores da classificação de fibras têxteis e lavagem de lã"
+  },
+  {
+    "familyCode": "7612",
+    "familyTitle": "Operadores da fiação"
+  },
+  {
+    "familyCode": "7613",
+    "familyTitle": "Operadores de tear e máquinas similares"
+  },
+  {
+    "familyCode": "7614",
+    "familyTitle": "Trabalhadores de acabamento, tingimento e estamparia das indústrias têxteis"
+  },
+  {
+    "familyCode": "7618",
+    "familyTitle": "Inspetores e revisores de produção têxtil"
+  },
+  {
+    "familyCode": "7620",
+    "familyTitle": "Trabalhadores polivalentes do curtimento de couros e peles"
+  },
+  {
+    "familyCode": "7621",
+    "familyTitle": "Trabalhadores da preparação do curtimento de couros e peles"
+  },
+  {
+    "familyCode": "7622",
+    "familyTitle": "Trabalhadores do curtimento de couros e peles"
+  },
+  {
+    "familyCode": "7623",
+    "familyTitle": "Trabalhadores do acabamento de couros e peles"
+  },
+  {
+    "familyCode": "7630",
+    "familyTitle": "Profissionais polivalentes da confecção de roupas"
+  },
+  {
+    "familyCode": "7631",
+    "familyTitle": "Trabalhadores da preparação da confecção de roupas"
+  },
+  {
+    "familyCode": "7632",
+    "familyTitle": "Operadores de máquinas para costura de peças do vestuário"
+  },
+  {
+    "familyCode": "7633",
+    "familyTitle": "Operadores de máquinas para bordado e acabamento de roupas"
+  },
+  {
+    "familyCode": "7640",
+    "familyTitle": "Trabalhadores polivalentes da confecção de calçados"
+  },
+  {
+    "familyCode": "7641",
+    "familyTitle": "Trabalhadores da preparação da confecção de calçados"
+  },
+  {
+    "familyCode": "7642",
+    "familyTitle": "Operadores de máquinas de costurar e montar calçados"
+  },
+  {
+    "familyCode": "7643",
+    "familyTitle": "Trabalhadores de acabamento de calçados"
+  },
+  {
+    "familyCode": "7650",
+    "familyTitle": "Trabalhadores polivalentes da confecção de artefatos de tecidos e couros"
+  },
+  {
+    "familyCode": "7651",
+    "familyTitle": "Trabalhadores da preparação de artefatos de tecidos, couros e tapeçaria"
+  },
+  {
+    "familyCode": "7652",
+    "familyTitle": "Trabalhadores da confecção de artefatos de tecidos, couros e sintéticos"
+  },
+  {
+    "familyCode": "7653",
+    "familyTitle": "Operadores de máquinas na confecção de artefatos de  couro"
+  },
+  {
+    "familyCode": "7654",
+    "familyTitle": "Trabalhadores do acabamento de artefatos de tecidos e couros"
+  },
+  {
+    "familyCode": "7661",
+    "familyTitle": "Trabalhadores da pré-impressão gráfica"
+  },
+  {
+    "familyCode": "7662",
+    "familyTitle": "Trabalhadores da impressão gráfica"
+  },
+  {
+    "familyCode": "7663",
+    "familyTitle": "Trabalhadores do acabamento gráfico"
+  },
+  {
+    "familyCode": "7664",
+    "familyTitle": "Trabalhadores de laboratório fotográfico e radiológico"
+  },
+  {
+    "familyCode": "7681",
+    "familyTitle": "Trabalhadores de tecelagem manual, tricô, crochê, rendas e afins"
+  },
+  {
+    "familyCode": "7682",
+    "familyTitle": "Trabalhadores artesanais da confecção de peças e tecidos"
+  },
+  {
+    "familyCode": "7683",
+    "familyTitle": "Trabalhadores artesanais da confecção de calçados e artefatos de couros e peles"
+  },
+  {
+    "familyCode": "7686",
+    "familyTitle": "Trabalhadores tipográficos linotipistas e afins"
+  },
+  {
+    "familyCode": "7687",
+    "familyTitle": "Encadernadores e recuperadores de livros (pequenos lotes ou a unidade)"
+  },
+  {
+    "familyCode": "7701",
+    "familyTitle": "Supervisores em indústria de madeira, mobiliário e da carpintaria veicular"
+  },
+  {
+    "familyCode": "7711",
+    "familyTitle": "Marceneiros e afins"
+  },
+  {
+    "familyCode": "7721",
+    "familyTitle": "Trabalhadores de tratamento e preparação da madeira"
+  },
+  {
+    "familyCode": "7731",
+    "familyTitle": "Operadores de máquinas de desdobramento da madeira"
+  },
+  {
+    "familyCode": "7732",
+    "familyTitle": "Operadores de máquinas de aglomeração e prensagem de chapas"
+  },
+  {
+    "familyCode": "7733",
+    "familyTitle": "Operadores de usinagem convencional de madeira"
+  },
+  {
+    "familyCode": "7734",
+    "familyTitle": "Operadores de máquina de usinar madeira (produção em série)"
+  },
+  {
+    "familyCode": "7735",
+    "familyTitle": "Operadores de máquinas de usinagem de madeira cnc"
+  },
+  {
+    "familyCode": "7741",
+    "familyTitle": "Montadores de móveis e artefatos de madeira"
+  },
+  {
+    "familyCode": "7751",
+    "familyTitle": "Trabalhadores de arte e  do acabamento em madeira do mobiliário"
+  },
+  {
+    "familyCode": "7764",
+    "familyTitle": "Confeccionadores de artefatos de madeira, móveis de vime e afins"
+  },
+  {
+    "familyCode": "7771",
+    "familyTitle": "Carpinteiros navais"
+  },
+  {
+    "familyCode": "7772",
+    "familyTitle": "Carpinteiros de carrocerias e carretas"
+  },
+  {
+    "familyCode": "7801",
+    "familyTitle": "Supervisores de trabalhadores de embalagem e etiquetagem"
+  },
+  {
+    "familyCode": "7811",
+    "familyTitle": "Condutores de processos robotizados"
+  },
+  {
+    "familyCode": "7813",
+    "familyTitle": "Operadores de equipamentos pilotados remotamente"
+  },
+  {
+    "familyCode": "7817",
+    "familyTitle": "Trabalhadores subaquáticos"
+  },
+  {
+    "familyCode": "7821",
+    "familyTitle": "Operadores de máquinas e equipamentos de elevação"
+  },
+  {
+    "familyCode": "7822",
+    "familyTitle": "Operadores de equipamentos de movimentação de cargas"
+  },
+  {
+    "familyCode": "7823",
+    "familyTitle": "Motoristas de veículos de pequeno e médio porte"
+  },
+  {
+    "familyCode": "7824",
+    "familyTitle": "Motoristas de ônibus urbanos, metropolitanos e rodoviários"
+  },
+  {
+    "familyCode": "7825",
+    "familyTitle": "Motoristas de veículos de cargas em geral"
+  },
+  {
+    "familyCode": "7826",
+    "familyTitle": "Operadores de veículos sobre trilhos e cabos aéreos"
+  },
+  {
+    "familyCode": "7827",
+    "familyTitle": "Trabalhadores aquaviários"
+  },
+  {
+    "familyCode": "7828",
+    "familyTitle": "Condutores de animais e de veículos de tração animal e pedais"
+  },
+  {
+    "familyCode": "7831",
+    "familyTitle": "Trabalhadores de manobras de transportes sobre trilhos"
+  },
+  {
+    "familyCode": "7832",
+    "familyTitle": "Trabalhadores de cargas e descargas de mercadorias"
+  },
+  {
+    "familyCode": "7841",
+    "familyTitle": "Trabalhadores de embalagem e de etiquetagem"
+  },
+  {
+    "familyCode": "7842",
+    "familyTitle": "Alimentadores de linhas de produção"
+  },
+  {
+    "familyCode": "7911",
+    "familyTitle": "Artesãos"
+  },
+  {
+    "familyCode": "8101",
+    "familyTitle": "Supervisores de produção em indústrias químicas, petroquímicas e afins"
+  },
+  {
+    "familyCode": "8102",
+    "familyTitle": "Supervisores de produção em indústrias de transformação de plásticos e borrachas"
+  },
+  {
+    "familyCode": "8103",
+    "familyTitle": "Supervisores de produção em indústrias de produtos farmacêuticos, cosméticos e afins"
+  },
+  {
+    "familyCode": "8110",
+    "familyTitle": "Operadores polivalentes de equipamentos em indústrias químicas, petroquímicas e afins"
+  },
+  {
+    "familyCode": "8111",
+    "familyTitle": "Operadores de equipamentos de moagem e mistura de materiais (tratamentos químicos e afins)"
+  },
+  {
+    "familyCode": "8112",
+    "familyTitle": "Operadores de calcinação e de tratamentos químicos de materiais radioativos"
+  },
+  {
+    "familyCode": "8113",
+    "familyTitle": "Operadores de equipamentos de filtragem e separação"
+  },
+  {
+    "familyCode": "8114",
+    "familyTitle": "Operadores de equipamentos de destilação, evaporação e reação"
+  },
+  {
+    "familyCode": "8115",
+    "familyTitle": "Operadores de equipamentos de produção e refino de petróleo e gás"
+  },
+  {
+    "familyCode": "8116",
+    "familyTitle": "Operadores de equipamentos de coqueificação"
+  },
+  {
+    "familyCode": "8117",
+    "familyTitle": "Operadores de instalações e máquinas de produtos plásticos, de borracha e moldadores de parafinas"
+  },
+  {
+    "familyCode": "8118",
+    "familyTitle": "Operadores de máquinas e instalações de produtos farmacêuticos, cosméticos e afins"
+  },
+  {
+    "familyCode": "8121",
+    "familyTitle": "Trabalhadores da fabricação de munição e explosivos químicos"
+  },
+  {
+    "familyCode": "8131",
+    "familyTitle": "Operadores de processos das indústrias de transformação de produtos químicos, petroquímicos e afins"
+  },
+  {
+    "familyCode": "8181",
+    "familyTitle": "Laboratoristas industriais auxiliares"
+  },
+  {
+    "familyCode": "8201",
+    "familyTitle": "Supervisores de produção em indústrias siderúrgicas"
+  },
+  {
+    "familyCode": "8202",
+    "familyTitle": "Supervisores na fabricação de materiais para construção (vidros e cerâmicas)"
+  },
+  {
+    "familyCode": "8211",
+    "familyTitle": "Operadores de instalações de sinterização"
+  },
+  {
+    "familyCode": "8212",
+    "familyTitle": "Operadores de fornos de primeira  fusão e aciaria"
+  },
+  {
+    "familyCode": "8213",
+    "familyTitle": "Operadores de equipamentos de laminação"
+  },
+  {
+    "familyCode": "8214",
+    "familyTitle": "Operadores de equipamentos de acabamento de chapas e metais"
+  },
+  {
+    "familyCode": "8221",
+    "familyTitle": "Forneiros metalúrgicos (segunda fusão e reaquecimento)"
+  },
+  {
+    "familyCode": "8231",
+    "familyTitle": "Operadores na preparação de massas para abrasivo, vidro, cerâmica, porcelana e materiais de construção"
+  },
+  {
+    "familyCode": "8232",
+    "familyTitle": "Operadores de equipamentos de fabricação  e beneficiamento de cristais, vidros, cerâmicas, porcelanas, fibras de vidro, abrasivos e afins"
+  },
+  {
+    "familyCode": "8233",
+    "familyTitle": "Operadores de instalações e equipamentos de fabricação de materiais de construção"
+  },
+  {
+    "familyCode": "8281",
+    "familyTitle": "Trabalhadores da fabricação de cerâmica estrutural para construção"
+  },
+  {
+    "familyCode": "8301",
+    "familyTitle": "Supervisores da fabricação de celulose e papel"
+  },
+  {
+    "familyCode": "8311",
+    "familyTitle": "Preparadores de pasta para fabricação de papel"
+  },
+  {
+    "familyCode": "8321",
+    "familyTitle": "Operadores de máquinas de fabricar papel e papelão"
+  },
+  {
+    "familyCode": "8331",
+    "familyTitle": "Operadores de máquinas na fabricação de produtos de papel e papelão"
+  },
+  {
+    "familyCode": "8332",
+    "familyTitle": "Trabalhadores artesanais de produtos de papel e papelão"
+  },
+  {
+    "familyCode": "8401",
+    "familyTitle": "Supervisores da fabricação de alimentos, bebidas e fumo"
+  },
+  {
+    "familyCode": "8411",
+    "familyTitle": "Trabalhadores da indústria de beneficiamento de grãos, cereais e afins"
+  },
+  {
+    "familyCode": "8412",
+    "familyTitle": "Trabalhadores no beneficiamento do sal"
+  },
+  {
+    "familyCode": "8413",
+    "familyTitle": "Trabalhadores na fabricação e refino de açúcar"
+  },
+  {
+    "familyCode": "8414",
+    "familyTitle": "Trabalhadores na fabricação e conservação de alimentos"
+  },
+  {
+    "familyCode": "8415",
+    "familyTitle": "Trabalhadores na pasteurização do leite e na fabricação de laticínios  e afins"
+  },
+  {
+    "familyCode": "8416",
+    "familyTitle": "Trabalhadores na industrialização de café, cacau, mate e de produtos afins"
+  },
+  {
+    "familyCode": "8417",
+    "familyTitle": "Trabalhadores na fabricação de cachaça, cerveja, vinhos e outras bebidas"
+  },
+  {
+    "familyCode": "8418",
+    "familyTitle": "Operadores de equipamentos na fabricação de pães, massas alimentícias, doces, chocolates e achocolatados"
+  },
+  {
+    "familyCode": "8421",
+    "familyTitle": "Cigarreiros e beneficiadores de fumo"
+  },
+  {
+    "familyCode": "8422",
+    "familyTitle": "Charuteiros"
+  },
+  {
+    "familyCode": "8481",
+    "familyTitle": "Trabalhadores artesanais na conservação de alimentos"
+  },
+  {
+    "familyCode": "8482",
+    "familyTitle": "Trabalhadores artesanais na pasteurização do leite e na fabricação de laticínios e afins"
+  },
+  {
+    "familyCode": "8483",
+    "familyTitle": "Padeiros, confeiteiros e afins"
+  },
+  {
+    "familyCode": "8484",
+    "familyTitle": "Trabalhadores na degustação e classificação de grãos e afins"
+  },
+  {
+    "familyCode": "8485",
+    "familyTitle": "Magarefes e afins"
+  },
+  {
+    "familyCode": "8486",
+    "familyTitle": "Trabalhadores artesanais na indústria do fumo"
+  },
+  {
+    "familyCode": "8601",
+    "familyTitle": "Supervisores da produção de utilidades"
+  },
+  {
+    "familyCode": "8611",
+    "familyTitle": "Operadores de instalações de geração e distribuição de energia elétrica, hidráulica, térmica ou nuclear"
+  },
+  {
+    "familyCode": "8612",
+    "familyTitle": "Operadores de instalações de distribuição de energia elétrica"
+  },
+  {
+    "familyCode": "8621",
+    "familyTitle": "Operadores de máquinas a vapor e utilidades"
+  },
+  {
+    "familyCode": "8622",
+    "familyTitle": "Operadores de instalações de captação, tratamento e distribuição de água"
+  },
+  {
+    "familyCode": "8623",
+    "familyTitle": "Operadores de instalações de captação e esgotos"
+  },
+  {
+    "familyCode": "8624",
+    "familyTitle": "Operadores de instalações de extração, processamento, envasamento e distribuição de gases"
+  },
+  {
+    "familyCode": "8625",
+    "familyTitle": "Operadores de instalações de refrigeração e ar-condicionado"
+  },
+  {
+    "familyCode": "9101",
+    "familyTitle": "Supervisores em serviços de reparação e manutenção de máquinas e equipamentos industriais, comerciais e residenciais"
+  },
+  {
+    "familyCode": "9102",
+    "familyTitle": "Supervisores em serviços de reparação e manutenção veicular"
+  },
+  {
+    "familyCode": "9109",
+    "familyTitle": "Supervisores de outros trabalhadores de serviços de reparação, conservação e manutenção"
+  },
+  {
+    "familyCode": "9111",
+    "familyTitle": "Mecânicos de manutenção de bombas, motores, compressores e equipamentos de transmissão"
+  },
+  {
+    "familyCode": "9112",
+    "familyTitle": "Mecânicos de manutenção e instalação de aparelhos de  climatização e refrigeração"
+  },
+  {
+    "familyCode": "9113",
+    "familyTitle": "Mecânicos de manutenção de máquinas industriais"
+  },
+  {
+    "familyCode": "9131",
+    "familyTitle": "Mecânicos de manutenção de máquinas pesadas e equipamentos agrícolas"
+  },
+  {
+    "familyCode": "9141",
+    "familyTitle": "Mecânicos de manutenção aeronáutica"
+  },
+  {
+    "familyCode": "9142",
+    "familyTitle": "Mecânicos de manutenção de motores e equipamentos navais"
+  },
+  {
+    "familyCode": "9143",
+    "familyTitle": "Mecânicos de manutenção metroferroviária"
+  },
+  {
+    "familyCode": "9144",
+    "familyTitle": "Mecânicos de manutenção de veículos automotores"
+  },
+  {
+    "familyCode": "9151",
+    "familyTitle": "Técnicos em manutenção e reparação de instrumentos de medição e precisão"
+  },
+  {
+    "familyCode": "9152",
+    "familyTitle": "Restauradores de instrumentos musicais"
+  },
+  {
+    "familyCode": "9153",
+    "familyTitle": "Técnicos em manutenção e reparação de equipamentos biomédicos"
+  },
+  {
+    "familyCode": "9154",
+    "familyTitle": "Reparadores de equipamentos fotográficos"
+  },
+  {
+    "familyCode": "9191",
+    "familyTitle": "Lubrificadores"
+  },
+  {
+    "familyCode": "9192",
+    "familyTitle": "Trabalhadores de manutenção de roçadeiras, motoserras e similares"
+  },
+  {
+    "familyCode": "9193",
+    "familyTitle": "Mecânicos de manutenção de bicicletas e equipamentos esportivos e de ginástica"
+  },
+  {
+    "familyCode": "9501",
+    "familyTitle": "Supervisores de manutenção eletroeletrônica industrial, comercial e predial"
+  },
+  {
+    "familyCode": "9502",
+    "familyTitle": "Supervisores de manutenção eletroeletrônica veicular"
+  },
+  {
+    "familyCode": "9503",
+    "familyTitle": "Supervisores de manutenção eletromecânica"
+  },
+  {
+    "familyCode": "9511",
+    "familyTitle": "Eletricistas de manutenção eletroeletrônica"
+  },
+  {
+    "familyCode": "9513",
+    "familyTitle": "Instaladores e mantenedores de sistemas eletroeletrônicos de segurança"
+  },
+  {
+    "familyCode": "9531",
+    "familyTitle": "Eletricistas eletrônicos de manutenção veicular (aérea, terrestre e naval)"
+  },
+  {
+    "familyCode": "9541",
+    "familyTitle": "Instaladores e mantenedores eletromecânicos de elevadores, escadas e portas automáticas"
+  },
+  {
+    "familyCode": "9542",
+    "familyTitle": "Reparadores de aparelhos eletrodomésticos"
+  },
+  {
+    "familyCode": "9543",
+    "familyTitle": "Reparadores de equipamentos de escritório"
+  },
+  {
+    "familyCode": "9911",
+    "familyTitle": "Conservadores de vias permanentes (trilhos)"
+  },
+  {
+    "familyCode": "9912",
+    "familyTitle": "Mantenedores de equipamentos de parques de diversões e similares"
+  },
+  {
+    "familyCode": "9913",
+    "familyTitle": "Reparadores de carrocerias de veículos"
+  },
+  {
+    "familyCode": "9921",
+    "familyTitle": "Trabalhadores elementares de serviços de manutenção veicular"
+  },
+  {
+    "familyCode": "9922",
+    "familyTitle": "Trabalhadores operacionais de conservação de vias permanentes (exceto trilhos)"
+  }
+]
