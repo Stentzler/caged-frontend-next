@@ -26,7 +26,12 @@
   "Occupations": {
     "eyebrow": "CBO classification",
     "title": "Occupational families",
-    "description": "DataEmpregos analytics are grouped by CBO occupational family, not by individual occupations."
+    "description": "DataEmpregos analytics are grouped by CBO occupational family, not by individual occupations.",
+    "listTitle": "Occupational family list",
+    "searchLabel": "Search occupational families",
+    "searchPlaceholder": "Type a profession or family name",
+    "resultCount": "{count, plural, =0 {No families found} one {# family found} other {# families found}}",
+    "emptyState": "No occupational family matches your search. Try another term."
   },
   "About": {
     "eyebrow": "About the project",

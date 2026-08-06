@@ -368,17 +368,16 @@ Lambda ARNs, SDK error objects, or raw backend payloads.
 This page lists the same cached family options used by the Home selector. It is
 an explanatory index, not a list of every individual CBO occupation.
 
-Each item contains:
-
-- `familyCode`, such as `5172`.
-- Official `familyTitle`, such as “Policiais, guardas-civis municipais e agentes
-  de trânsito”.
+Each item displays the official `familyTitle`, such as “Policiais,
+guardas-civis municipais e agentes de trânsito”. The corresponding
+`familyCode` remains an internal value for the Home selector and is not shown
+in this reference list.
 
 Requirements:
 
 - Sort consistently by code unless product testing supports another order.
-- Provide client-side search by family code and title after the server supplies
-  the cached list.
+- Provide client-side search by family title after the server supplies the
+  cached list.
 - Preserve diacritics in display.
 - Explain that analytics are aggregated by family.
 - Use a semantic list or table that works on desktop and mobile.

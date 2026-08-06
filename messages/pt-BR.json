@@ -26,7 +26,12 @@
   "Occupations": {
     "eyebrow": "Classificação CBO",
     "title": "Famílias ocupacionais",
-    "description": "As análises do DataEmpregos são agrupadas por famílias ocupacionais da CBO, e não por ocupações individuais."
+    "description": "As análises do DataEmpregos são agrupadas por famílias ocupacionais da CBO, e não por ocupações individuais.",
+    "listTitle": "Lista de famílias ocupacionais",
+    "searchLabel": "Buscar uma família ocupacional",
+    "searchPlaceholder": "Digite o nome da profissão ou família",
+    "resultCount": "{count, plural, =0 {Nenhuma família encontrada} one {# família encontrada} other {# famílias encontradas}}",
+    "emptyState": "Nenhuma família ocupacional corresponde à sua busca. Tente outro termo."
   },
   "About": {
     "eyebrow": "Sobre o projeto",

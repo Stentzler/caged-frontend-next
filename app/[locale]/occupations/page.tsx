@@ -1,7 +1,10 @@
 import { useTranslations } from "next-intl";
+import occupationalFamilies from "@/data/cbo-occupational-families.json";
+import { OccupationalFamilyList } from "@/components/occupations/occupational-family-list";
 
 export default function OccupationsPage() {
   const t = useTranslations("Occupations");
+  const familyTitles = occupationalFamilies.map(({ familyTitle }) => familyTitle);
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
@@ -16,6 +19,7 @@ export default function OccupationsPage() {
           {t("description")}
         </p>
       </div>
+      <OccupationalFamilyList familyTitles={familyTitles} />
     </section>
   );
 }
