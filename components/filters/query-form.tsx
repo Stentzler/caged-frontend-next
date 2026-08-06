@@ -1,8 +1,12 @@
 "use client";
 
-import { useMemo, useState, useTransition } from "react";
+import { useEffect, useMemo, useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { queryCaged, type QueryCagedActionResult } from "@/actions/query-caged";
+import { queryCaged } from "@/actions/query-caged";
+import { QueryResults } from "@/components/charts/query-results";
+import type { CagedErrorCode } from "@/domain/caged/errors";
+import type { CagedQueryResult } from "@/domain/caged/schemas";
+import { loadLastQuery, saveLastQuery } from "./last-query-storage";
 import { SearchableSelect } from "./searchable-select";
 
 type LocationMode = "COUNTRY" | "STATE" | "CITY";
@@ -35,10 +39,10 @@ function monthInputToQueryMonth(value: string): string {
 }
 
 function getActionErrorMessage(
-  result: Exclude<QueryCagedActionResult, { ok: true }>,
+  error: CagedErrorCode,
   t: ReturnType<typeof useTranslations>,
 ): string {
-  switch (result.error) {
+  switch (error) {
     case "invalid_input":
       return t("errorInvalidInput");
     case "invalid_query":
@@ -66,7 +70,31 @@ export function QueryForm({ occupationalFamilies, states }: QueryFormProps) {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [formError, setFormError] = useState<FormError>();
-  const [queryResult, setQueryResult] = useState<QueryCagedActionResult>();
+  const [queryData, setQueryData] = useState<CagedQueryResult>();
+  const [queryError, setQueryError] = useState<CagedErrorCode>();
+
+  useEffect(() => {
+    const restoreFrame = window.requestAnimationFrame(() => {
+      const lastQuery = loadLastQuery();
+
+      if (lastQuery === undefined) {
+        return;
+      }
+
+      setLocationMode(lastQuery.locationMode);
+      setStateInput(lastQuery.stateInput);
+      setStateCode(lastQuery.stateCode);
+      setCityInput(lastQuery.cityInput);
+      setCityCode(lastQuery.cityCode);
+      setProfessionInput(lastQuery.professionInput);
+      setProfessionCode(lastQuery.professionCode);
+      setFrom(lastQuery.from);
+      setTo(lastQuery.to);
+      setQueryData(lastQuery.result);
+    });
+
+    return () => window.cancelAnimationFrame(restoreFrame);
+  }, []);
 
   const stateOptions = useMemo(
     () => states.map(({ stateCode: value, stateName: label }) => ({ label, value })),
@@ -101,7 +129,7 @@ export function QueryForm({ occupationalFamilies, states }: QueryFormProps) {
     setLocationMode(mode);
     resetLocationSelection();
     setFormError(undefined);
-    setQueryResult(undefined);
+    setQueryError(undefined);
   }
 
   function changeState(inputValue: string) {
@@ -113,7 +141,7 @@ export function QueryForm({ occupationalFamilies, states }: QueryFormProps) {
   function submitQuery(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setFormError(undefined);
-    setQueryResult(undefined);
+    setQueryError(undefined);
 
     if (locationMode !== "COUNTRY" && stateCode === undefined) {
       setFormError("missingState");
@@ -145,11 +173,32 @@ export function QueryForm({ occupationalFamilies, states }: QueryFormProps) {
     };
 
     startTransition(async () => {
-      setQueryResult(await queryCaged(input));
+      const result = await queryCaged(input);
+
+      if (!result.ok) {
+        setQueryError(result.error);
+        return;
+      }
+
+      setQueryData(result.data);
+      saveLastQuery({
+        cityCode,
+        cityInput,
+        from,
+        locationMode,
+        professionCode,
+        professionInput,
+        result: result.data,
+        stateCode,
+        stateInput,
+        to,
+        version: 1,
+      });
     });
   }
 
-  const queryError = queryResult?.ok === false ? getActionErrorMessage(queryResult, t) : undefined;
+  const queryErrorMessage =
+    queryError === undefined ? undefined : getActionErrorMessage(queryError, t);
 
   return (
     <form className="mt-10 space-y-8" onSubmit={submitQuery}>
@@ -245,9 +294,9 @@ export function QueryForm({ occupationalFamilies, states }: QueryFormProps) {
           {t(`validation${formError}`)}
         </p>
       ) : null}
-      {queryError !== undefined ? (
+      {queryErrorMessage !== undefined ? (
         <p aria-live="polite" className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
-          {queryError}
+          {queryErrorMessage}
         </p>
       ) : null}
 
@@ -259,15 +308,8 @@ export function QueryForm({ occupationalFamilies, states }: QueryFormProps) {
         {isPending ? t("submitPending") : t("submit")}
       </button>
 
-      {queryResult?.ok ? (
-        <section aria-labelledby="raw-result-title" className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4">
-          <h2 className="text-lg font-bold text-[var(--foreground)]" id="raw-result-title">
-            {t("rawResultTitle")}
-          </h2>
-          <pre className="mt-4 overflow-x-auto text-xs leading-5 text-[var(--foreground)]">
-            {JSON.stringify(queryResult.data, null, 2)}
-          </pre>
-        </section>
+      {queryData !== undefined ? (
+        <QueryResults result={queryData} />
       ) : null}
     </form>
   );

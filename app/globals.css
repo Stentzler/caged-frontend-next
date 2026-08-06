@@ -9,6 +9,10 @@
   --focus-ring: #155eef;
   --primary: #155eef;
   --primary-foreground: #ffffff;
+  --comparison: #b54708;
+  --positive: #155eef;
+  --negative: #b42318;
+  --chart-grid: #d8dee9;
 }
 
 body {

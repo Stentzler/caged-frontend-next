@@ -51,8 +51,26 @@
     "errorInvalidInput": "Revise os campos selecionados e tente novamente.",
     "errorInvalidQuery": "Esta consulta não está disponível para os filtros escolhidos.",
     "errorUnavailable": "Os dados estão temporariamente indisponíveis. Tente novamente em instantes.",
-    "errorUnexpected": "Não foi possível consultar os dados agora. Tente novamente em instantes.",
-    "rawResultTitle": "Resposta da consulta"
+    "errorUnexpected": "Não foi possível consultar os dados agora. Tente novamente em instantes."
+  },
+  "Results": {
+    "title": "Resultado da consulta",
+    "description": "{profession} em {location}, de {from} à {to}.",
+    "periodSummary": "Resumo de {from} à {to}",
+    "admissions": "Admissões",
+    "dismissals": "Desligamentos",
+    "netBalance": "Saldo de empregos",
+    "averageSalary": "Salário médio de admissão",
+    "admissionsAndDismissalsTitle": "Admissões e desligamentos",
+    "netBalanceTitle": "Saldo de empregos",
+    "averageSalaryTitle": "Salário médio de admissão",
+    "totalTurnover": "Movimentações totais",
+    "salaryCount": "Registros salariais",
+    "tableTitle": "Dados mensais",
+    "tableCaption": "Valores mensais retornados pela consulta",
+    "month": "Mês",
+    "noData": "Não há dados mensais para esta consulta.",
+    "notAvailable": "Não disponível"
   },
   "Occupations": {
     "eyebrow": "Classificação CBO",

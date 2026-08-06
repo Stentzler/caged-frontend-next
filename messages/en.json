@@ -51,8 +51,26 @@
     "errorInvalidInput": "Review the selected fields and try again.",
     "errorInvalidQuery": "This query is not available for the selected filters.",
     "errorUnavailable": "The data is temporarily unavailable. Try again shortly.",
-    "errorUnexpected": "The data could not be queried right now. Try again shortly.",
-    "rawResultTitle": "Query response"
+    "errorUnexpected": "The data could not be queried right now. Try again shortly."
+  },
+  "Results": {
+    "title": "Query result",
+    "description": "{profession} in {location}, from {from} to {to}.",
+    "periodSummary": "Summary from {from} to {to}",
+    "admissions": "Admissions",
+    "dismissals": "Dismissals",
+    "netBalance": "Net employment balance",
+    "averageSalary": "Average admission salary",
+    "admissionsAndDismissalsTitle": "Admissions and dismissals",
+    "netBalanceTitle": "Net employment balance",
+    "averageSalaryTitle": "Average admission salary",
+    "totalTurnover": "Total movements",
+    "salaryCount": "Salary records",
+    "tableTitle": "Monthly data",
+    "tableCaption": "Monthly values returned by the query",
+    "month": "Month",
+    "noData": "There is no monthly data for this query.",
+    "notAvailable": "Not available"
   },
   "Occupations": {
     "eyebrow": "CBO classification",
