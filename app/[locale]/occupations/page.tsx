@@ -1,9 +1,9 @@
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import occupationalFamilies from "@/data/cbo-occupational-families.json";
 import { OccupationalFamilyList } from "@/components/occupations/occupational-family-list";
 
-export default function OccupationsPage() {
-  const t = useTranslations("Occupations");
+export default async function OccupationsPage() {
+  const t = await getTranslations("Occupations");
   const familyTitles = occupationalFamilies.map(({ familyTitle }) => familyTitle);
 
   return (

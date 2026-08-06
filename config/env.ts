@@ -11,7 +11,7 @@ const environmentSchema = z.object({
   CAGED_QUERY_LAMBDA_URL: z.url().optional(),
 });
 
-type ServerConfiguration =
+export type ServerConfiguration =
   | {
       queryTransport: "function_url";
       queryLambdaUrl: string;

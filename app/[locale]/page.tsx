@@ -1,10 +1,14 @@
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { QueryForm } from "@/components/filters/query-form";
 import occupationalFamilies from "@/data/cbo-occupational-families.json";
 import geography from "@/data/caged-geography.json";
+import { loadDatasetCatalog } from "@/server/caged/dataset-catalog-service";
 
-export default function HomePage() {
-  const t = useTranslations("Home");
+export default async function HomePage() {
+  const [t, catalogResult] = await Promise.all([
+    getTranslations("Home"),
+    loadDatasetCatalog(),
+  ]);
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
@@ -19,7 +23,11 @@ export default function HomePage() {
           {t("description")}
         </p>
       </div>
-      <QueryForm occupationalFamilies={occupationalFamilies} states={geography.states} />
+      <QueryForm
+        initialCatalog={catalogResult.ok ? catalogResult.data : undefined}
+        occupationalFamilies={occupationalFamilies}
+        states={geography.states}
+      />
     </section>
   );
 }

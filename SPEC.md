@@ -35,13 +35,15 @@ or errors. The UI must make that status clear without using alarmist language.
 ## 3. Product principles
 
 1. Make the first useful query simple. Brazil, all occupational families, and
-   the Lambda's latest-month default form a valid request.
+   the dataset catalog's latest available month form a valid request.
 2. Use precise terminology. The grouping is a CBO occupational family
    (`family_code` and `family_title`), not an individual occupation.
 3. Keep AWS implementation details out of the browser. Lambda names, ARNs,
    invocation payloads, credentials, and DynamoDB details are server-only.
 4. Treat the existing query Lambda as an unchanged external contract.
-5. Let the query Lambda own dataset and date-range business validation.
+5. Use the cached dataset catalog to validate selectable months and the maximum
+   inclusive date range before querying; let the query Lambda remain authoritative
+   for any other dataset policy.
 6. Design mobile-first while using the additional space of desktop screens well.
 7. Make charts understandable without color alone and provide an accessible
    tabular representation of the same data.
@@ -73,8 +75,8 @@ The following decisions are part of the MVP and must not be changed casually:
 - Query results are not application-cached in the MVP.
 - The UI exposes country, state, and city queries. City selection is narrowed
   by a selected state but sends only the city code to the query Lambda.
-- If both dates are omitted, Next.js sends neither date and accepts the Lambda's
-  default: the latest available dataset month only.
+- Home loads the dataset catalog server-side with a 24-hour cache. Both date
+  controls default to its latest available month and send that month explicitly.
 - CloudFront and AWS WAF are the public edge. Nginx on EC2 proxies to the Next.js
   container at `127.0.0.1:3000`.
 - WAF approximately limits POST requests to 10 per source IP per 60 seconds;
@@ -91,7 +93,7 @@ The following decisions are part of the MVP and must not be changed casually:
 - Header navigation, locale switcher, and footer.
 - Brazil-wide, state-level, and city-level analytics queries.
 - Optional occupational-family selector.
-- Optional paired start and end month controls.
+- Catalog-backed start and end month controls with a latest-month default.
 - Monthly charts, summary values, and accessible data table.
 - Direct server-side invocation of the existing query Lambda.
 - Bundled static CBO occupational-family data shared by Home and Occupational Families.
@@ -246,8 +248,8 @@ The form contains:
 | --- | --- | --- |
 | Geography | Country, state, or city selector; defaults to Brazil | `locationType`, `locationCode` |
 | Occupational family | Optional searchable combobox; defaults to all families | `professionCode`, omitted for all |
-| Start month | Optional month selector | `from` as `YYYYMM` |
-| End month | Optional month selector | `to` as `YYYYMM` |
+| Start month | Catalog-backed month selector; defaults to latest | `from` as `YYYYMM` |
+| End month | Catalog-backed month selector; defaults to latest | `to` as `YYYYMM` |
 
 The state selector uses official two-digit IBGE state codes. It exposes all 26
 states and the Federal District. City selection first narrows by state, then
@@ -259,19 +261,12 @@ including in the English interface. It may add localized helper text, but must
 not invent translated official classifications. Search should match code and
 title, be accent-insensitive where practical, and support keyboard navigation.
 
-Date controls have three structural states:
-
-1. Both absent: omit both `from` and `to` and let the Lambda select its latest
-   available month.
-2. Both present: send both values as `YYYYMM`.
-3. Only one present: prevent submission and ask the user to complete or clear
-   the pair.
-
-The third rule checks request completeness, not dataset policy. Next.js must not
-duplicate the Lambda's maximum-range, latest-month, catalog-availability, or
-chronological business rules. The Lambda response is authoritative for those
-rules. Native control constraints may improve input shape but must not drift
-into a second copy of backend policy.
+Home loads a validated dataset catalog before enabling the query controls. Both
+date controls initially select `latest_available_month`. The form and Server
+Action reject a range when its start is after its end, its inclusive length is
+greater than `max_date_range`, or any calendar month in the range is absent from
+`available_months`. The Lambda remains authoritative for policies not published
+by the catalog.
 
 ### 9.3 Submission behavior
 
@@ -428,7 +423,20 @@ state is a UI filter and is not an additional Lambda parameter. Do not rename
 these camelCase input keys: the Lambda reads them directly from
 `queryStringParameters`.
 
-### 12.2 Invocation output envelope
+### 12.2 Dataset catalog operation
+
+The same Lambda provides the dataset catalog. The local-development Function
+URL receives a `POST` request with `operation=getDatasetCatalog` in its query
+string and returns the catalog JSON body directly. Direct IAM invocation receives
+`{ "operation": "getDatasetCatalog" }` as its payload and returns the Lambda
+envelope.
+
+The catalog contains unique `available_months`, a `latest_available_month` in
+that list, a positive integer `max_date_range`, and optional `updated_at`. It is
+cached server-side for approximately 24 hours. If loading or validation fails,
+Home blocks queries and offers a retry action.
+
+### 12.3 Invocation output envelope
 
 AWS SDK invocation returns an SDK result with a binary `Payload` and may include
 `FunctionError`. Decode the payload as UTF-8 JSON. The decoded outer Lambda
@@ -450,7 +458,7 @@ The adapter must handle these layers independently:
 6. A non-2xx `statusCode`.
 7. A 2xx body that fails the expected success schema.
 
-### 12.3 Direct body shape
+### 12.4 Direct body shape
 
 Because direct invocation bypasses API Gateway response mapping, the successful
 `body` uses the Lambda's internal snake_case fields:
@@ -487,7 +495,7 @@ The normalized success model contains:
 Month ordering in the UI must be derived by sorting valid `YYYYMM` keys ascending;
 do not rely on JSON object insertion order as the domain guarantee.
 
-### 12.4 Backend statuses
+### 12.5 Backend statuses
 
 | Status | Meaning | Application category |
 | --- | --- | --- |
@@ -570,9 +578,9 @@ The action must:
 6. Avoid returning SDK errors, raw payloads, stack traces, environment values,
    or sensitive configuration.
 
-The action must not attempt to enforce the Lambda's current catalog month,
-maximum query span, or date ordering policy. Those policies can change with the
-backend and are reported through the Lambda's 400 response.
+The action applies the cached catalog's latest-month default and rejects ranges
+that violate its published month availability or maximum inclusive span. It does
+not duplicate any Lambda policy that the catalog does not publish.
 
 ## 15. Internationalization
 
@@ -721,6 +729,7 @@ AWS account numbers when avoidable, or credentials.
 - Do not assume CloudFront caches Server Actions or analytics results.
 - Do not application-cache analytics responses in MVP; the query Lambda already
   performs read-only retrieval from processed DynamoDB records.
+- Cache the dataset catalog on the server for approximately 24 hours.
 - Keep the current static CBO file small and only replace it with a cached
   server-side source when the CBO Lambda contract exists.
 - Avoid layout shift by reserving sensible loading/result space.
@@ -779,7 +788,7 @@ equivalent tool before implementation begins.
 
 ### 24.1 Unit tests
 
-- Query form structural schema.
+- Dataset-catalog schema, normalization, and date-range validation.
 - State-code and month-shape helpers.
 - Query event construction, including omitted optional fields.
 - Outer Lambda envelope decoding.
@@ -802,8 +811,9 @@ equivalent tool before implementation begins.
 
 - Load Portuguese Home, submit default Brazil query, and render latest-month
   results from a deterministic test double.
-- Submit a state plus occupational family plus paired range.
-- Reject a single-ended date pair before invocation.
+- Submit a state plus occupational family plus a valid catalog-backed range.
+- Reject unavailable, discontinuous, reversed, and over-limit catalog ranges
+  before invocation.
 - Switch locale and reach the equivalent page.
 - Navigate Home, Occupational Families, and About on desktop and mobile.
 - Display a user-friendly 429 state.
@@ -845,9 +855,10 @@ The MVP is complete when all of the following are true:
    city submission sends the correct six-digit IBGE `locationCode`.
 5. Selecting a family sends its `familyCode`, never an individual occupation
    code.
-6. Omitting both dates lets the Lambda return only its latest available month.
-7. Providing both dates passes them unchanged as `YYYYMM`.
-8. Next.js does not duplicate Lambda-owned maximum-range or catalog-date rules.
+6. Home defaults both date controls to the catalog's latest available month.
+7. Providing dates sends them unchanged as `YYYYMM`.
+8. Next.js rejects ranges that violate the catalog's available-month or maximum
+   inclusive-range rules without duplicating unpublished Lambda policy.
 9. The direct-invocation envelope and snake_case body are validated and mapped
    once in a server-only adapter.
 10. No Lambda endpoint, ARN, function name, AWS credential, or raw payload is

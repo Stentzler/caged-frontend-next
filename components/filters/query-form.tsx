@@ -1,9 +1,14 @@
 "use client";
 
-import { useEffect, useMemo, useState, useTransition } from "react";
+import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
+import { getDatasetCatalogAction } from "@/actions/get-dataset-catalog";
 import { queryCaged } from "@/actions/query-caged";
 import { QueryResults } from "@/components/charts/query-results";
+import {
+  hasValidCatalogDateRange,
+  type DatasetCatalog,
+} from "@/domain/caged/dataset-catalog";
 import type { CagedErrorCode } from "@/domain/caged/errors";
 import type { CagedQueryResult } from "@/domain/caged/schemas";
 import { loadLastQuery, saveLastQuery } from "./last-query-storage";
@@ -28,15 +33,16 @@ type State = {
 };
 
 type QueryFormProps = {
+  initialCatalog?: DatasetCatalog;
   occupationalFamilies: readonly OccupationalFamily[];
   states: readonly State[];
 };
 
-type FormError = "incompleteDateRange" | "missingCity" | "missingState";
-
-function monthInputToQueryMonth(value: string): string {
-  return value.replace("-", "");
-}
+type FormError =
+  | "invalidCity"
+  | "invalidDateRange"
+  | "invalidProfession"
+  | "invalidState";
 
 function getActionErrorMessage(
   error: CagedErrorCode,
@@ -58,7 +64,7 @@ function getActionErrorMessage(
   }
 }
 
-export function QueryForm({ occupationalFamilies, states }: QueryFormProps) {
+export function QueryForm({ initialCatalog, occupationalFamilies, states }: QueryFormProps) {
   const locale = useLocale();
   const t = useTranslations("QueryForm");
   const [isPending, startTransition] = useTransition();
@@ -66,16 +72,21 @@ export function QueryForm({ occupationalFamilies, states }: QueryFormProps) {
   const [stateInput, setStateInput] = useState("");
   const [stateCode, setStateCode] = useState<string>();
   const [cityInput, setCityInput] = useState("");
-  const [cityCode, setCityCode] = useState<string>();
   const [professionInput, setProfessionInput] = useState("");
-  const [professionCode, setProfessionCode] = useState<string>();
-  const [from, setFrom] = useState("");
-  const [to, setTo] = useState("");
+  const [catalog, setCatalog] = useState(initialCatalog);
+  const [from, setFrom] = useState(initialCatalog?.latestAvailableMonth ?? "");
+  const [to, setTo] = useState(initialCatalog?.latestAvailableMonth ?? "");
   const [formError, setFormError] = useState<FormError>();
   const [queryData, setQueryData] = useState<CagedQueryResult>();
   const [queryError, setQueryError] = useState<CagedErrorCode>();
+  const [isCatalogPending, startCatalogTransition] = useTransition();
+  const hasRestoredQuery = useRef(false);
 
   useEffect(() => {
+    if (catalog === undefined || hasRestoredQuery.current) {
+      return;
+    }
+
     const restoreFrame = window.requestAnimationFrame(() => {
       const lastQuery = loadLastQuery();
 
@@ -83,33 +94,40 @@ export function QueryForm({ occupationalFamilies, states }: QueryFormProps) {
         return;
       }
 
+      const savedFrom = lastQuery.from || lastQuery.result.query.from;
+      const savedTo = lastQuery.to || lastQuery.result.query.to;
+
+      if (!hasValidCatalogDateRange(savedFrom, savedTo, catalog)) {
+        return;
+      }
+
       setLocationMode(lastQuery.locationMode);
       setStateInput(lastQuery.stateInput);
       setStateCode(lastQuery.stateCode);
       setCityInput(lastQuery.cityInput);
-      setCityCode(lastQuery.cityCode);
       setProfessionInput(lastQuery.professionInput);
-      setProfessionCode(lastQuery.professionCode);
-      setFrom(lastQuery.from);
-      setTo(lastQuery.to);
+      setFrom(savedFrom);
+      setTo(savedTo);
       setQueryData(lastQuery.result);
     });
 
+    hasRestoredQuery.current = true;
+
     return () => window.cancelAnimationFrame(restoreFrame);
-  }, []);
+  }, [catalog]);
 
   const stateOptions = useMemo(
     () => states.map(({ stateCode: value, stateName: label }) => ({ label, value })),
     [states],
   );
-  const selectedState = states.find((state) => state.stateCode === stateCode);
+  const selectedStateByCode = states.find((state) => state.stateCode === stateCode);
   const cityOptions = useMemo(
     () =>
-      selectedState?.cities.map(({ cityCode: value, cityName: label }) => ({
+      selectedStateByCode?.cities.map(({ cityCode: value, cityName: label }) => ({
         label,
         value,
       })) ?? [],
-    [selectedState],
+    [selectedStateByCode],
   );
   const professionOptions = useMemo(
     () =>
@@ -119,12 +137,15 @@ export function QueryForm({ occupationalFamilies, states }: QueryFormProps) {
       })),
     [occupationalFamilies],
   );
+  const monthOptions = useMemo(
+    () => [...(catalog?.availableMonths ?? [])].reverse(),
+    [catalog],
+  );
 
   function resetLocationSelection() {
     setStateInput("");
     setStateCode(undefined);
     setCityInput("");
-    setCityCode(undefined);
   }
 
   function changeLocationMode(mode: LocationMode) {
@@ -136,8 +157,32 @@ export function QueryForm({ occupationalFamilies, states }: QueryFormProps) {
 
   function changeState(inputValue: string) {
     setStateInput(inputValue);
+    setStateCode(undefined);
     setCityInput("");
-    setCityCode(undefined);
+  }
+
+  function changeCity(inputValue: string) {
+    setCityInput(inputValue);
+  }
+
+  function changeProfession(inputValue: string) {
+    setProfessionInput(inputValue);
+  }
+
+  function retryCatalog() {
+    startCatalogTransition(async () => {
+      const result = await getDatasetCatalogAction();
+
+      if (!result.ok) {
+        return;
+      }
+
+      setCatalog(result.data);
+      setFrom(result.data.latestAvailableMonth);
+      setTo(result.data.latestAvailableMonth);
+      setFormError(undefined);
+      setQueryError(undefined);
+    });
   }
 
   function submitQuery(event: React.FormEvent<HTMLFormElement>) {
@@ -145,18 +190,37 @@ export function QueryForm({ occupationalFamilies, states }: QueryFormProps) {
     setFormError(undefined);
     setQueryError(undefined);
 
-    if (locationMode !== "COUNTRY" && stateCode === undefined) {
-      setFormError("missingState");
+    if (catalog === undefined) {
       return;
     }
 
-    if (locationMode === "CITY" && cityCode === undefined) {
-      setFormError("missingCity");
+    const selectedStateByInput = states.find(
+      (state) => state.stateName === stateInput,
+    );
+    const selectedCityByInput = selectedStateByInput?.cities.find(
+      (city) => city.cityName === cityInput,
+    );
+    const selectedProfessionByInput = occupationalFamilies.find(
+      (family) => family.familyTitle === professionInput,
+    );
+
+    if (locationMode !== "COUNTRY" && selectedStateByInput === undefined) {
+      setFormError("invalidState");
       return;
     }
 
-    if ((from.length === 0) !== (to.length === 0)) {
-      setFormError("incompleteDateRange");
+    if (locationMode === "CITY" && selectedCityByInput === undefined) {
+      setFormError("invalidCity");
+      return;
+    }
+
+    if (professionInput.length > 0 && selectedProfessionByInput === undefined) {
+      setFormError("invalidProfession");
+      return;
+    }
+
+    if (!hasValidCatalogDateRange(from, to, catalog)) {
+      setFormError("invalidDateRange");
       return;
     }
 
@@ -167,11 +231,17 @@ export function QueryForm({ occupationalFamilies, states }: QueryFormProps) {
     const input = {
       locale,
       locationType: locationMode,
-      ...(locationMode === "STATE" ? { locationCode: stateCode } : {}),
-      ...(locationMode === "CITY" ? { locationCode: cityCode } : {}),
-      ...(professionCode === undefined ? {} : { professionCode }),
-      ...(from.length === 0 ? {} : { from: monthInputToQueryMonth(from) }),
-      ...(to.length === 0 ? {} : { to: monthInputToQueryMonth(to) }),
+      ...(locationMode === "STATE"
+        ? { locationCode: selectedStateByInput?.stateCode }
+        : {}),
+      ...(locationMode === "CITY"
+        ? { locationCode: selectedCityByInput?.cityCode }
+        : {}),
+      ...(selectedProfessionByInput === undefined
+        ? {}
+        : { professionCode: selectedProfessionByInput.familyCode }),
+      from,
+      to,
     };
 
     startTransition(async () => {
@@ -184,14 +254,14 @@ export function QueryForm({ occupationalFamilies, states }: QueryFormProps) {
 
       setQueryData(result.data);
       saveLastQuery({
-        cityCode,
+        cityCode: selectedCityByInput?.cityCode,
         cityInput,
         from,
         locationMode,
-        professionCode,
+        professionCode: selectedProfessionByInput?.familyCode,
         professionInput,
         result: result.data,
-        stateCode,
+        stateCode: selectedStateByInput?.stateCode,
         stateInput,
         to,
         version: 1,
@@ -214,6 +284,7 @@ export function QueryForm({ occupationalFamilies, states }: QueryFormProps) {
             >
               <input
                 checked={locationMode === mode}
+                disabled={catalog === undefined}
                 name="location-mode"
                 onChange={() => changeLocationMode(mode)}
                 type="radio"
@@ -228,6 +299,7 @@ export function QueryForm({ occupationalFamilies, states }: QueryFormProps) {
       {locationMode !== "COUNTRY" ? (
         <SearchableSelect
           emptyMessage={t("noStates")}
+          disabled={catalog === undefined}
           id="state"
           inputValue={stateInput}
           label={t("stateLabel")}
@@ -240,13 +312,13 @@ export function QueryForm({ occupationalFamilies, states }: QueryFormProps) {
 
       {locationMode === "CITY" ? (
         <SearchableSelect
-          disabled={stateCode === undefined}
+          disabled={catalog === undefined || stateCode === undefined}
           emptyMessage={stateCode === undefined ? t("selectStateFirst") : t("noCities")}
           id="city"
           inputValue={cityInput}
           label={t("cityLabel")}
-          onInputValueChange={setCityInput}
-          onSelectionChange={setCityCode}
+          onInputValueChange={changeCity}
+          onSelectionChange={() => undefined}
           options={cityOptions}
           placeholder={t("cityPlaceholder")}
         />
@@ -254,11 +326,12 @@ export function QueryForm({ occupationalFamilies, states }: QueryFormProps) {
 
       <SearchableSelect
         emptyMessage={t("noProfessions")}
+        disabled={catalog === undefined}
         id="profession"
         inputValue={professionInput}
         label={t("professionLabel")}
-        onInputValueChange={setProfessionInput}
-        onSelectionChange={setProfessionCode}
+        onInputValueChange={changeProfession}
+        onSelectionChange={() => undefined}
         options={professionOptions}
         placeholder={t("professionPlaceholder")}
       />
@@ -269,23 +342,35 @@ export function QueryForm({ occupationalFamilies, states }: QueryFormProps) {
         <div className="mt-3 grid gap-4 sm:grid-cols-2">
           <label className="text-sm font-semibold text-[var(--foreground)]" htmlFor="from">
             {t("fromLabel")}
-            <input
+            <select
               className="mt-2 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 py-2.5 font-normal"
+              disabled={catalog === undefined}
               id="from"
               onChange={(event) => setFrom(event.target.value)}
-              type="month"
               value={from}
-            />
+            >
+              {monthOptions.map((month) => (
+                <option key={month} value={month}>
+                  {`${month.slice(4, 6)}/${month.slice(0, 4)}`}
+                </option>
+              ))}
+            </select>
           </label>
           <label className="text-sm font-semibold text-[var(--foreground)]" htmlFor="to">
             {t("toLabel")}
-            <input
+            <select
               className="mt-2 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 py-2.5 font-normal"
+              disabled={catalog === undefined}
               id="to"
               onChange={(event) => setTo(event.target.value)}
-              type="month"
               value={to}
-            />
+            >
+              {monthOptions.map((month) => (
+                <option key={month} value={month}>
+                  {`${month.slice(4, 6)}/${month.slice(0, 4)}`}
+                </option>
+              ))}
+            </select>
           </label>
         </div>
         <p className="mt-2 text-sm text-[var(--muted-foreground)]">{t("dateHelp")}</p>
@@ -293,8 +378,23 @@ export function QueryForm({ occupationalFamilies, states }: QueryFormProps) {
 
       {formError !== undefined ? (
         <p aria-live="polite" className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
-          {t(`validation${formError}`)}
+          {formError === "invalidDateRange"
+            ? t("validationinvalidDateRange", { maxDateRange: catalog?.maxDateRange ?? 0 })
+            : t(`validation${formError}`)}
         </p>
+      ) : null}
+      {catalog === undefined ? (
+        <div aria-live="polite" className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+          <p>{t("catalogUnavailable")}</p>
+          <button
+            className="mt-2 font-semibold underline underline-offset-4 disabled:cursor-not-allowed disabled:opacity-70"
+            disabled={isCatalogPending}
+            onClick={retryCatalog}
+            type="button"
+          >
+            {isCatalogPending ? t("catalogRetryPending") : t("catalogRetry")}
+          </button>
+        </div>
       ) : null}
       {queryErrorMessage !== undefined ? (
         <p aria-live="polite" className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
@@ -304,7 +404,7 @@ export function QueryForm({ occupationalFamilies, states }: QueryFormProps) {
 
       <button
         className="rounded-lg bg-[var(--primary)] px-4 py-2.5 text-sm font-semibold text-[var(--primary-foreground)] disabled:cursor-not-allowed disabled:opacity-70"
-        disabled={isPending}
+        disabled={catalog === undefined || isCatalogPending || isPending}
         type="submit"
       >
         {isPending ? t("submitPending") : t("submit")}

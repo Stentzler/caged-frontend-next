@@ -7,6 +7,8 @@ import { Header } from "@/components/layout/header";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
 
+export const instant = false;
+
 type LocaleLayoutProps = Readonly<{
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
@@ -28,6 +30,10 @@ export async function generateMetadata({ params }: LocaleLayoutProps): Promise<M
     },
     description: t("description"),
   };
+}
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
 }
 
 export default async function LocaleLayout({

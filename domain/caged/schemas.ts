@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const monthSchema = z.string().regex(/^\d{6}$/);
+const monthSchema = z.string().regex(/^\d{4}(0[1-9]|1[0-2])$/);
 const stateCodeSchema = z.string().regex(/^\d{2}$/);
 const cityCodeSchema = z.string().regex(/^\d{6}$/);
 const occupationalFamilyCodeSchema = z.string().regex(/^\d{4}$/);

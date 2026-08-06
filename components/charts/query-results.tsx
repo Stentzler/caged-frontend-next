@@ -33,6 +33,8 @@ type PeriodSummary = {
   netBalance: number;
 };
 
+const countAxisWidth = 88;
+
 function subscribeToReducedMotion(onStoreChange: () => void): () => void {
   const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   mediaQuery.addEventListener("change", onStoreChange);
@@ -143,6 +145,8 @@ export function QueryResults({ result }: QueryResultsProps) {
       : "";
   const periodSummary = summarizePeriod(monthlyMetrics);
   const netBalanceDomain = getNetBalanceDomain(monthlyMetrics);
+  const professionTitle =
+    result.profession.code === "ALL" ? t("allProfessions") : result.profession.title;
   const showCharts = monthlyMetrics.length > 1;
   const summaryCards = [
     { label: t("admissions"), value: formatCount(periodSummary.admissions) },
@@ -165,7 +169,7 @@ export function QueryResults({ result }: QueryResultsProps) {
           {t("description", {
             from: formatMonthLabel(result.query.from),
             location: result.location.name,
-            profession: result.profession.title,
+            profession: professionTitle,
             to: formatMonthLabel(result.query.to),
           })}
         </p>
@@ -196,7 +200,7 @@ export function QueryResults({ result }: QueryResultsProps) {
             <LineChart accessibilityLayer data={monthlyMetrics} margin={{ left: 8, right: 16, top: 8 }}>
               <CartesianGrid stroke="var(--chart-grid)" strokeDasharray="3 3" />
               <XAxis dataKey="month" tickFormatter={formatMonthLabel} />
-              <YAxis tickFormatter={formatCount} width={64} />
+              <YAxis tickFormatter={formatCount} width={countAxisWidth} />
               <Tooltip
                 formatter={formatTooltipCount}
                 labelFormatter={formatTooltipMonth}
@@ -228,7 +232,11 @@ export function QueryResults({ result }: QueryResultsProps) {
             <BarChart accessibilityLayer data={monthlyMetrics} margin={{ left: 8, right: 16, top: 8 }}>
               <CartesianGrid stroke="var(--chart-grid)" strokeDasharray="3 3" />
               <XAxis dataKey="month" tickFormatter={formatMonthLabel} />
-              <YAxis domain={netBalanceDomain} tickFormatter={formatCount} width={64} />
+              <YAxis
+                domain={netBalanceDomain}
+                tickFormatter={formatCount}
+                width={countAxisWidth}
+              />
               <Tooltip
                 formatter={formatTooltipCount}
                 labelFormatter={formatTooltipMonth}
