@@ -1,0 +1,54 @@
+{
+  "Metadata": {
+    "title": "DataEmpregos",
+    "description": "Explore monthly formal-employment movements in Brazil."
+  },
+  "Brand": {
+    "name": "DataEmpregos"
+  },
+  "Navigation": {
+    "primaryLabel": "Primary navigation",
+    "home": "Home",
+    "occupations": "Occupational families",
+    "about": "About",
+    "portuguese": "Português",
+    "english": "English",
+    "switchLocale": "Switch to {language}",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "Home": {
+    "eyebrow": "Novo CAGED",
+    "title": "Explore formal-employment movements in Brazil.",
+    "description": "DataEmpregos makes monthly hiring, dismissal, and admission-salary movements easier to understand."
+  },
+  "Occupations": {
+    "eyebrow": "CBO classification",
+    "title": "Occupational families",
+    "description": "DataEmpregos analytics are grouped by CBO occupational family, not by individual occupations."
+  },
+  "About": {
+    "eyebrow": "About the project",
+    "title": "How to interpret the data",
+    "introduction": "DataEmpregos is an independent visualization of monthly formal-employment movements published through Novo CAGED.",
+    "dataset": "The data originates with Brazil's Ministry of Labor and Employment, through PDET and Novo CAGED.",
+    "grouping": "Results are grouped by geography and CBO occupational family.",
+    "movements": "Admissions and dismissals are recorded movements; they are not a complete count of everyone employed.",
+    "salary": "Average admission salary refers to the admission salary field in the dataset, not the average salary of everyone in an occupational family. Values are nominal Brazilian reais.",
+    "revisions": "Official data can be revised, and this project's processing or presentation may contain omissions, delays, or errors.",
+    "independence": "This is an independent experimental project. It is not an official service and is not supported or endorsed by a government body.",
+    "officialSource": "Consult the official Novo CAGED source"
+  },
+  "Footer": {
+    "disclaimer": "Independent experimental project. For official or authoritative use, consult the public Novo CAGED source.",
+    "copyright": "© {year} DataEmpregos",
+    "officialSource": "Official source",
+    "github": "GitHub"
+  },
+  "Status": {
+    "loading": "Loading page…",
+    "errorTitle": "This page could not be loaded.",
+    "errorDescription": "Please try again shortly.",
+    "retry": "Try again"
+  }
+}

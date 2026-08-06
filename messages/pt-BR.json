@@ -1,0 +1,54 @@
+{
+  "Metadata": {
+    "title": "DataEmpregos",
+    "description": "Explore a movimentação mensal do emprego formal no Brasil."
+  },
+  "Brand": {
+    "name": "DataEmpregos"
+  },
+  "Navigation": {
+    "primaryLabel": "Navegação principal",
+    "home": "Início",
+    "occupations": "Famílias ocupacionais",
+    "about": "Sobre",
+    "portuguese": "Português",
+    "english": "English",
+    "switchLocale": "Mudar para {language}",
+    "openMenu": "Abrir menu",
+    "closeMenu": "Fechar menu"
+  },
+  "Home": {
+    "eyebrow": "Novo CAGED",
+    "title": "Explore a movimentação do emprego formal no Brasil.",
+    "description": "DataEmpregos torna os movimentos mensais de admissões, desligamentos e salários de admissão mais fáceis de entender."
+  },
+  "Occupations": {
+    "eyebrow": "Classificação CBO",
+    "title": "Famílias ocupacionais",
+    "description": "As análises do DataEmpregos são agrupadas por famílias ocupacionais da CBO, e não por ocupações individuais."
+  },
+  "About": {
+    "eyebrow": "Sobre o projeto",
+    "title": "Como interpretar os dados",
+    "introduction": "DataEmpregos é uma visualização independente dos movimentos mensais do emprego formal publicados no Novo CAGED.",
+    "dataset": "Os dados têm origem no Ministério do Trabalho e Emprego, por meio do PDET e do Novo CAGED.",
+    "grouping": "Os resultados são agrupados por geografia e família ocupacional da CBO.",
+    "movements": "Admissões e desligamentos representam movimentações registradas; não são uma contagem completa de todas as pessoas empregadas.",
+    "salary": "O salário médio de admissão se refere ao campo salarial das admissões no conjunto de dados e não representa o salário médio de todas as pessoas de uma família ocupacional. Os valores são nominais em reais brasileiros.",
+    "revisions": "Os dados oficiais podem ser revisados e o processamento ou a apresentação deste projeto podem conter omissões, atrasos ou erros.",
+    "independence": "Este é um projeto experimental e independente. Ele não é um serviço oficial e não é apoiado ou endossado por órgãos governamentais.",
+    "officialSource": "Consultar a fonte oficial do Novo CAGED"
+  },
+  "Footer": {
+    "disclaimer": "Projeto independente e experimental. Para usos oficiais ou autoritativos, consulte a fonte pública do Novo CAGED.",
+    "copyright": "© {year} DataEmpregos",
+    "officialSource": "Fonte oficial",
+    "github": "GitHub"
+  },
+  "Status": {
+    "loading": "Carregando página…",
+    "errorTitle": "Não foi possível carregar esta página.",
+    "errorDescription": "Tente novamente em alguns instantes.",
+    "retry": "Tentar novamente"
+  }
+}

@@ -815,6 +815,10 @@ lockfile installation. Strict TypeScript is required. New lint suppressions,
 unchecked type assertions, and boundary schema bypasses require a documented
 reason.
 
+> Temporary implementation note: the initial localized shell uses npm and
+> `package-lock.json` because pnpm is not yet available in this repository. A
+> dedicated maintenance task will migrate to the project-standard pnpm workflow.
+
 ## 26. MVP acceptance criteria
 
 The MVP is complete when all of the following are true:
