@@ -13,7 +13,8 @@
     "about": "About",
     "portuguese": "Português",
     "english": "English",
-    "switchLocale": "Switch to {language}",
+    "switchLocale": "Alterar para {flag}",
+    "switchLocaleLabel": "Alterar idioma para {language}",
     "openMenu": "Open menu",
     "closeMenu": "Close menu"
   },

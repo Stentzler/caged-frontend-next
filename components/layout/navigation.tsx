@@ -18,6 +18,9 @@ export function Navigation() {
   const t = useTranslations("Navigation");
 
   const alternateLocale = locale === "pt-BR" ? "en" : "pt-BR";
+  const alternateLanguage =
+    alternateLocale === "pt-BR" ? t("portuguese") : t("english");
+  const alternateFlag = alternateLocale === "pt-BR" ? "🇧🇷" : "🇬🇧";
 
   function changeLocale() {
     router.replace(pathname, { locale: alternateLocale });
@@ -44,13 +47,14 @@ export function Navigation() {
           </Link>
         ))}
         <button
+          aria-label={t("switchLocaleLabel", { language: alternateLanguage })}
           className="rounded-lg px-3 py-2 text-left text-sm font-semibold text-[var(--primary)] transition hover:bg-blue-50"
           onClick={changeLocale}
           type="button"
         >
-          {t("switchLocale", {
-            language: alternateLocale === "pt-BR" ? t("portuguese") : t("english"),
-          })}
+          <span aria-hidden="true" className="flex items-center gap-1.5">
+            {t("switchLocale", { flag: alternateFlag })}
+          </span>
         </button>
       </nav>
       <button

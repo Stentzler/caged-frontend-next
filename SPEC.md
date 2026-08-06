@@ -62,6 +62,10 @@ The following decisions are part of the MVP and must not be changed casually:
 - AWS SDK v3 `@aws-sdk/client-lambda` invokes Lambdas from server-only modules.
 - The existing query Lambda remains unchanged. A Next.js adapter sends an event
   containing `queryStringParameters` and parses the Lambda response envelope.
+- Temporary local-development exception: when a server-only Function URL is
+  configured outside production, the adapter calls it through HTTP and validates
+  its direct JSON response. Production rejects that URL configuration and uses
+  direct IAM invocation.
 - The browser never calls Lambda, DynamoDB, API Gateway, or an AWS service.
 - Analytics submissions use a Server Action and therefore reach the public
   stack as POST requests.
@@ -685,6 +689,7 @@ The application validates environment values at startup or first server use.
 | --- | --- | --- | --- |
 | `AWS_REGION` | Server | Yes outside fully mocked tests | Lambda client region |
 | `CAGED_QUERY_LAMBDA_FUNCTION_NAME` | Server | Yes | Existing query Lambda name or ARN |
+| `CAGED_QUERY_LAMBDA_URL` | Server | Local development only | Function URL used only outside production |
 | `CAGED_CBO_LAMBDA_FUNCTION_NAME` | Server | Required when CBO integration is enabled | Future CBO Lambda name or ARN |
 | `CBO_CACHE_TTL_SECONDS` | Server | No; default `86400` | CBO cache lifetime |
 | `NEXT_PUBLIC_SITE_URL` | Browser-safe | Deployment-dependent | Canonical public site URL |
@@ -694,6 +699,10 @@ The application validates environment values at startup or first server use.
 Prefer a feature/config switch for the not-yet-existing CBO Lambda if the first
 frontend deployment must precede it. The disabled state must degrade explicitly
 to “all occupational families” rather than inventing fixture data in production.
+
+The local Function URL is not browser configuration and must remain in ignored
+local environment files. It is never accepted in production, where direct IAM
+invocation remains mandatory.
 
 Provide `.env.example` with placeholders only. Never commit production values,
 AWS account numbers when avoidable, or credentials.
