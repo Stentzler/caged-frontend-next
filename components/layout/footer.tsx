@@ -11,12 +11,12 @@ export async function Footer() {
 
   return (
     <footer className="border-t border-[var(--border)] bg-[var(--surface)]">
-      <div className="mx-auto grid max-w-6xl gap-6 px-4 py-8 text-sm text-[var(--muted-foreground)] sm:px-6 lg:grid-cols-[1fr_auto] lg:px-8">
-        <div className="max-w-2xl space-y-2">
-          <p>{t("disclaimer")}</p>
-          <p>{t("copyright", { year: currentYear })}</p>
+      <div className="mx-auto flex max-w-6xl flex-col items-center gap-7 px-4 py-8 text-center text-sm text-[var(--muted-foreground)] sm:px-6 lg:px-8">
+        <div className="max-w-2xl space-y-1">
+          <p>{t("disclaimerIntro")}</p>
+          <p>{t("disclaimerSource")}</p>
         </div>
-        <div className="flex flex-col items-start gap-2 lg:items-end">
+        <div className="flex flex-wrap justify-center gap-x-8 gap-y-3">
           {publicSite.officialSourceUrl !== undefined ? (
             <a className="font-semibold text-[var(--primary)] underline-offset-4 hover:underline" href={publicSite.officialSourceUrl} rel="noreferrer" target="_blank">
               {t("officialSource")}
@@ -33,6 +33,7 @@ export async function Footer() {
             </a>
           ) : null}
         </div>
+        <p className="font-bold text-[var(--foreground)]">{t("copyright", { year: currentYear })}</p>
       </div>
     </footer>
   );

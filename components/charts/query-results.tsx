@@ -166,21 +166,29 @@ export function QueryResults({ result }: QueryResultsProps) {
       <div>
         <h2 className="text-2xl font-bold text-[var(--foreground)]">{t("title")}</h2>
         <p className="mt-2 text-[var(--muted-foreground)]">
-          {t("description", {
-            from: formatMonthLabel(result.query.from),
-            location: result.location.name,
-            profession: professionTitle,
-            to: formatMonthLabel(result.query.to),
-          })}
+          {result.query.from === result.query.to
+            ? t("descriptionSingle", {
+                location: result.location.name,
+                month: formatMonthLabel(result.query.from),
+                profession: professionTitle,
+              })
+            : t("description", {
+                from: formatMonthLabel(result.query.from),
+                location: result.location.name,
+                profession: professionTitle,
+                to: formatMonthLabel(result.query.to),
+              })}
         </p>
       </div>
 
       <section aria-labelledby="summary-title">
         <h3 className="text-lg font-bold text-[var(--foreground)]" id="summary-title">
-          {t("periodSummary", {
-            from: formatMonthLabel(result.query.from),
-            to: formatMonthLabel(result.query.to),
-          })}
+          {result.query.from === result.query.to
+            ? t("periodSummarySingle", { month: formatMonthLabel(result.query.from) })
+            : t("periodSummary", {
+                from: formatMonthLabel(result.query.from),
+                to: formatMonthLabel(result.query.to),
+              })}
         </h3>
         <dl className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {summaryCards.map((card) => (

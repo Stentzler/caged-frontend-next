@@ -11,6 +11,7 @@ import {
 } from "@/domain/caged/dataset-catalog";
 import type { CagedErrorCode } from "@/domain/caged/errors";
 import type { CagedQueryResult } from "@/domain/caged/schemas";
+import { Link } from "@/i18n/navigation";
 import { loadLastQuery, saveLastQuery } from "./last-query-storage";
 import { SearchableSelect } from "./searchable-select";
 
@@ -77,6 +78,9 @@ export function QueryForm({ initialCatalog, occupationalFamilies, states }: Quer
   const [from, setFrom] = useState(initialCatalog?.latestAvailableMonth ?? "");
   const [to, setTo] = useState(initialCatalog?.latestAvailableMonth ?? "");
   const [formError, setFormError] = useState<FormError>();
+  const [hasStateBeenBlurred, setHasStateBeenBlurred] = useState(false);
+  const [hasCityBeenBlurred, setHasCityBeenBlurred] = useState(false);
+  const [hasProfessionBeenBlurred, setHasProfessionBeenBlurred] = useState(false);
   const [queryData, setQueryData] = useState<CagedQueryResult>();
   const [queryError, setQueryError] = useState<CagedErrorCode>();
   const [isCatalogPending, startCatalogTransition] = useTransition();
@@ -141,11 +145,32 @@ export function QueryForm({ initialCatalog, occupationalFamilies, states }: Quer
     () => [...(catalog?.availableMonths ?? [])].reverse(),
     [catalog],
   );
+  const selectedStateByInput = states.find((state) => state.stateName === stateInput);
+  const selectedCityByInput = selectedStateByInput?.cities.find(
+    (city) => city.cityName === cityInput,
+  );
+  const selectedProfessionByInput = occupationalFamilies.find(
+    (family) => family.familyTitle === professionInput,
+  );
+  const isStateInvalid =
+    locationMode !== "COUNTRY" &&
+    (hasStateBeenBlurred || formError === "invalidState") &&
+    selectedStateByInput === undefined;
+  const isCityInvalid =
+    locationMode === "CITY" &&
+    (hasCityBeenBlurred || formError === "invalidCity") &&
+    selectedCityByInput === undefined;
+  const isProfessionInvalid =
+    professionInput.length > 0 &&
+    (hasProfessionBeenBlurred || formError === "invalidProfession") &&
+    selectedProfessionByInput === undefined;
 
   function resetLocationSelection() {
     setStateInput("");
     setStateCode(undefined);
     setCityInput("");
+    setHasStateBeenBlurred(false);
+    setHasCityBeenBlurred(false);
   }
 
   function changeLocationMode(mode: LocationMode) {
@@ -159,14 +184,24 @@ export function QueryForm({ initialCatalog, occupationalFamilies, states }: Quer
     setStateInput(inputValue);
     setStateCode(undefined);
     setCityInput("");
+    setHasCityBeenBlurred(false);
+    if (formError === "invalidState" || formError === "invalidCity") {
+      setFormError(undefined);
+    }
   }
 
   function changeCity(inputValue: string) {
     setCityInput(inputValue);
+    if (formError === "invalidCity") {
+      setFormError(undefined);
+    }
   }
 
   function changeProfession(inputValue: string) {
     setProfessionInput(inputValue);
+    if (formError === "invalidProfession") {
+      setFormError(undefined);
+    }
   }
 
   function retryCatalog() {
@@ -194,27 +229,20 @@ export function QueryForm({ initialCatalog, occupationalFamilies, states }: Quer
       return;
     }
 
-    const selectedStateByInput = states.find(
-      (state) => state.stateName === stateInput,
-    );
-    const selectedCityByInput = selectedStateByInput?.cities.find(
-      (city) => city.cityName === cityInput,
-    );
-    const selectedProfessionByInput = occupationalFamilies.find(
-      (family) => family.familyTitle === professionInput,
-    );
-
     if (locationMode !== "COUNTRY" && selectedStateByInput === undefined) {
+      setHasStateBeenBlurred(true);
       setFormError("invalidState");
       return;
     }
 
     if (locationMode === "CITY" && selectedCityByInput === undefined) {
+      setHasCityBeenBlurred(true);
       setFormError("invalidCity");
       return;
     }
 
     if (professionInput.length > 0 && selectedProfessionByInput === undefined) {
+      setHasProfessionBeenBlurred(true);
       setFormError("invalidProfession");
       return;
     }
@@ -298,11 +326,14 @@ export function QueryForm({ initialCatalog, occupationalFamilies, states }: Quer
 
       {locationMode !== "COUNTRY" ? (
         <SearchableSelect
-          emptyMessage={t("noStates")}
+          emptyMessage={stateInput.length > 0 ? t("noMatchingStates") : t("noStates")}
           disabled={catalog === undefined}
           id="state"
           inputValue={stateInput}
+          invalidMessage={t("validationinvalidState")}
+          isInvalid={isStateInvalid}
           label={t("stateLabel")}
+          onBlur={() => setHasStateBeenBlurred(true)}
           onInputValueChange={changeState}
           onSelectionChange={setStateCode}
           options={stateOptions}
@@ -313,10 +344,19 @@ export function QueryForm({ initialCatalog, occupationalFamilies, states }: Quer
       {locationMode === "CITY" ? (
         <SearchableSelect
           disabled={catalog === undefined || stateCode === undefined}
-          emptyMessage={stateCode === undefined ? t("selectStateFirst") : t("noCities")}
+          emptyMessage={
+            stateCode === undefined
+              ? t("selectStateFirst")
+              : cityInput.length > 0
+                ? t("noMatchingCities")
+                : t("noCities")
+          }
           id="city"
           inputValue={cityInput}
+          invalidMessage={t("validationinvalidCity")}
+          isInvalid={isCityInvalid}
           label={t("cityLabel")}
+          onBlur={() => setHasCityBeenBlurred(true)}
           onInputValueChange={changeCity}
           onSelectionChange={() => undefined}
           options={cityOptions}
@@ -325,11 +365,26 @@ export function QueryForm({ initialCatalog, occupationalFamilies, states }: Quer
       ) : null}
 
       <SearchableSelect
-        emptyMessage={t("noProfessions")}
+        emptyMessage={
+          professionInput.length > 0 ? t("noMatchingProfessions") : t("noProfessions")
+        }
         disabled={catalog === undefined}
         id="profession"
         inputValue={professionInput}
+        invalidMessage={t("validationinvalidProfession")}
+        isInvalid={isProfessionInvalid}
         label={t("professionLabel")}
+        labelAction={
+          <Link
+            aria-label={t("professionInfoLink")}
+            className="text-[var(--primary)] underline-offset-4 hover:underline"
+            href="/occupations"
+            title={t("professionInfoLink")}
+          >
+            <span aria-hidden="true">ⓘ</span>
+          </Link>
+        }
+        onBlur={() => setHasProfessionBeenBlurred(true)}
         onInputValueChange={changeProfession}
         onSelectionChange={() => undefined}
         options={professionOptions}
@@ -376,11 +431,9 @@ export function QueryForm({ initialCatalog, occupationalFamilies, states }: Quer
         <p className="mt-2 text-sm text-[var(--muted-foreground)]">{t("dateHelp")}</p>
       </fieldset>
 
-      {formError !== undefined ? (
+      {formError === "invalidDateRange" ? (
         <p aria-live="polite" className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
-          {formError === "invalidDateRange"
-            ? t("validationinvalidDateRange", { maxDateRange: catalog?.maxDateRange ?? 0 })
-            : t(`validation${formError}`)}
+          {t("validationinvalidDateRange", { maxDateRange: catalog?.maxDateRange ?? 0 })}
         </p>
       ) : null}
       {catalog === undefined ? (
@@ -402,16 +455,21 @@ export function QueryForm({ initialCatalog, occupationalFamilies, states }: Quer
         </p>
       ) : null}
 
-      <button
-        className="rounded-lg bg-[var(--primary)] px-4 py-2.5 text-sm font-semibold text-[var(--primary-foreground)] disabled:cursor-not-allowed disabled:opacity-70"
-        disabled={catalog === undefined || isCatalogPending || isPending}
-        type="submit"
-      >
-        {isPending ? t("submitPending") : t("submit")}
-      </button>
+      <div className="flex justify-center">
+        <button
+          className="rounded-lg bg-[var(--primary)] px-4 py-2.5 text-sm font-semibold text-[var(--primary-foreground)] disabled:cursor-not-allowed disabled:opacity-70"
+          disabled={catalog === undefined || isCatalogPending || isPending}
+          type="submit"
+        >
+          {isPending ? t("submitPending") : t("submit")}
+        </button>
+      </div>
 
       {queryData !== undefined ? (
-        <QueryResults result={queryData} />
+        <>
+          <hr className="border-0 border-t border-[var(--border)]" />
+          <QueryResults result={queryData} />
+        </>
       ) : null}
     </form>
   );

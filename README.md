@@ -34,10 +34,11 @@ available placeholders.
 
 The multi-stage Docker build produces a standalone, non-root Next.js image that
 listens on port 3000 and exposes `GET /health`. At runtime, production must also
-provide the public links used in the footer and About page:
+provide the public links used in the footer, About, and Professions pages:
 
 ```bash
 SITE_OFFICIAL_SOURCE_URL=https://pdet.mte.gov.br/novo-caged
+SITE_CBO_SOURCE_URL=https://www.gov.br/trabalho-e-emprego/pt-br/assuntos/cbo
 SITE_GITHUB_URL=https://github.com/Stentzler
 SITE_CONTACT_EMAIL=you@example.com
 ```

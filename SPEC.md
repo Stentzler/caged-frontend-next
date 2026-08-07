@@ -705,6 +705,7 @@ The application validates environment values at startup or first server use.
 | `CAGED_QUERY_LAMBDA_FUNCTION_NAME` | Server | Yes | Existing query Lambda name or ARN |
 | `CAGED_QUERY_LAMBDA_URL` | Server | Local development only | Function URL used only outside production |
 | `SITE_OFFICIAL_SOURCE_URL` | Rendered public link | Yes in production | Official Novo CAGED source |
+| `SITE_CBO_SOURCE_URL` | Rendered public link | Yes in production | Official CBO source |
 | `SITE_GITHUB_URL` | Rendered public link | Yes in production | Maintainer/project link |
 | `SITE_CONTACT_EMAIL` | Rendered public link | Yes in production | Public contact address |
 

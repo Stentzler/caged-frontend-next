@@ -2,6 +2,8 @@ import { connection } from "next/server";
 import { getTranslations } from "next-intl/server";
 import { getPublicSiteConfiguration } from "@/config/public-site";
 
+export const instant = false;
+
 export default async function AboutPage() {
   await connection();
 
@@ -11,13 +13,13 @@ export default async function AboutPage() {
     "dataset",
     "grouping",
     "movements",
+    "cltCoverage",
     "salary",
     "revisions",
-    "independence",
   ] as const;
 
   return (
-    <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+    <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
       <div className="space-y-8">
         <div className="space-y-4">
           <p className="text-sm font-bold tracking-[0.16em] text-[var(--primary)] uppercase">
@@ -30,15 +32,18 @@ export default async function AboutPage() {
             {t("introduction")}
           </p>
         </div>
-        <div className="space-y-4 text-base leading-7 text-[var(--muted-foreground)]">
+        <ul className="list-disc space-y-4 pl-5 text-base leading-7 text-[var(--muted-foreground)]">
           {statements.map((statement) => (
-            <p key={statement}>{t(statement)}</p>
+            <li key={statement}>{t(statement)}</li>
           ))}
-        </div>
+        </ul>
+        <p className="font-bold text-[var(--foreground)] uppercase">{t("independence")}</p>
         {publicSite.officialSourceUrl !== undefined ? (
-          <a className="inline-flex rounded-lg bg-[var(--primary)] px-4 py-2.5 text-sm font-semibold text-[var(--primary-foreground)]" href={publicSite.officialSourceUrl} rel="noreferrer" target="_blank">
-            {t("officialSource")}
-          </a>
+          <div className="flex justify-center">
+            <a className="inline-flex rounded-lg bg-[var(--primary)] px-4 py-2.5 text-sm font-semibold text-[var(--primary-foreground)]" href={publicSite.officialSourceUrl} rel="noreferrer" target="_blank">
+              {t("officialSource")}
+            </a>
+          </div>
         ) : null}
       </div>
     </section>
