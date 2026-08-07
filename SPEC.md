@@ -84,6 +84,11 @@ The following decisions are part of the MVP and must not be changed casually:
   HTTP 429 gracefully.
 - The deployment is managed by the separate `caged-frontend-terraform`
   repository and its GitHub OIDC, ECR, and SSM workflow.
+- Development delivery runs only for pushes to `develop`, uses the GitHub `dev`
+  environment, and deploys an immutable commit-SHA image through ECR and SSM.
+- The EC2 host reads its runtime environment file from the narrowly scoped
+  Parameter Store path configured by the GitHub environment; GitHub does not
+  receive the runtime parameter value.
 
 ## 5. Scope
 

@@ -48,3 +48,10 @@ Build the image with:
 ```bash
 docker build --tag dataempregos:local .
 ```
+
+## Development deployment
+
+Pushes to `develop` deploy the immutable commit-SHA image to the development
+EC2 host through GitHub OIDC, ECR, and Systems Manager. The complete GitHub
+environment configuration and first-deployment checklist are in
+[CICD_SETUP_GUIDE.md](CICD_SETUP_GUIDE.md).
