@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#0f3d75" />
+  <path d="M12 23.5 25 14l10 7 16-12" fill="none" stroke="#f6c344" stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+  <path d="m46 9 5 0 0 5" fill="none" stroke="#f6c344" stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+  <text x="9" y="49" fill="#fff" font-family="Arial, sans-serif" font-size="27" font-weight="700" letter-spacing="-2">DE</text>
+</svg>
