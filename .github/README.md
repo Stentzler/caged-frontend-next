@@ -6,6 +6,12 @@ host without SSH.
 
 Keep this document synchronized with the numbered stages in the workflow.
 
+The GitHub `dev` environment stores stable identifiers only: `AWS_REGION`,
+`ECR_REPOSITORY_URL`, `SSM_RUNTIME_ENV_PARAMETER`, and
+`SSM_DEPLOYMENT_TARGET_PARAMETER`. Terraform updates the latter parameter with
+the current EC2 ID whenever it replaces the host; GitHub never stores that
+mutable ID directly.
+
 ```mermaid
 flowchart LR
   source[Push to develop] --> checks[Check application]
@@ -21,7 +27,8 @@ flowchart LR
 
 GitHub checks out the commit, validates the required `dev` environment
 variables, runs lint/typecheck/build, and obtains temporary AWS credentials
-through OIDC. No permanent AWS key is stored in GitHub.
+through OIDC. It then reads the current deployment target from Parameter Store.
+No permanent AWS key or mutable EC2 ID is stored in GitHub.
 
 ## 1. Build or reuse the immutable image
 

@@ -24,7 +24,7 @@ jobs:
     env:
       AWS_REGION: ${{ vars.AWS_REGION }}
       ECR_REPOSITORY_URL: ${{ vars.ECR_REPOSITORY_URL }}
-      SSM_INSTANCE_ID: ${{ vars.SSM_INSTANCE_ID }}
+      SSM_DEPLOYMENT_TARGET_PARAMETER: ${{ vars.SSM_DEPLOYMENT_TARGET_PARAMETER }}
       SSM_RUNTIME_ENV_PARAMETER: ${{ vars.SSM_RUNTIME_ENV_PARAMETER }}
 
     steps:
@@ -36,7 +36,7 @@ jobs:
           set -euo pipefail
           : "${AWS_REGION:?Missing dev environment variable AWS_REGION}"
           : "${ECR_REPOSITORY_URL:?Missing dev environment variable ECR_REPOSITORY_URL}"
-          : "${SSM_INSTANCE_ID:?Missing dev environment variable SSM_INSTANCE_ID}"
+          : "${SSM_DEPLOYMENT_TARGET_PARAMETER:?Missing dev environment variable SSM_DEPLOYMENT_TARGET_PARAMETER}"
           : "${SSM_RUNTIME_ENV_PARAMETER:?Missing dev environment variable SSM_RUNTIME_ENV_PARAMETER}"
 
       - name: Install the exact Node.js dependencies
@@ -54,6 +54,23 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
           role-session-name: caged-frontend-${{ github.run_id }}
           role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+
+      - name: Resolve the current deployment target
+        id: deployment-target
+        run: |
+          set -euo pipefail
+          instance_id="$(aws ssm get-parameter \
+            --name "$SSM_DEPLOYMENT_TARGET_PARAMETER" \
+            --region "$AWS_REGION" \
+            --query 'Parameter.Value' \
+            --output text)"
+
+          if [[ ! "$instance_id" =~ ^i-[0-9a-f]{8,17}$ ]]; then
+            echo "Deployment target parameter did not contain a valid EC2 instance ID." >&2
+            exit 1
+          fi
+
+          echo "instance_id=$instance_id" >> "$GITHUB_OUTPUT"
 
       # Stage 1 — create the immutable image in ECR, or reuse it after a retry.
       - name: Build or reuse the immutable image
@@ -89,6 +106,7 @@ jobs:
       - name: Deploy with SSM and roll back an unhealthy image
         env:
           IMAGE_URI: ${{ steps.image.outputs.image_uri }}
+          SSM_INSTANCE_ID: ${{ steps.deployment-target.outputs.instance_id }}
         run: |
           set -euo pipefail
 
