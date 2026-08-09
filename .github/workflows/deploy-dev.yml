@@ -1,5 +1,8 @@
 name: Deploy development frontend
 
+# Deployment stages 1-5 are documented in .github/README.md.
+# If you change this workflow, update the matching stages in .github/README.md.
+
 on:
   push:
     branches: [develop]
@@ -52,6 +55,7 @@ jobs:
           role-session-name: caged-frontend-${{ github.run_id }}
           role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
 
+      # Stage 1 — create the immutable image in ECR, or reuse it after a retry.
       - name: Build or reuse the immutable image
         id: image
         env:
@@ -147,18 +151,23 @@ jobs:
           chmod 600 "$runtime_env_file"
           test -s "$runtime_env_file"
 
+          # Stage 2 — authenticate the EC2 host and download the selected image.
           ecr_registry="${image_uri%%/*}"
           aws ecr get-login-password --region "$aws_region" \
             | docker login --username AWS --password-stdin "$ecr_registry"
           docker pull "$image_uri"
+
+          # Stage 3 — replace the running container with the downloaded image.
           docker rm --force "$container_name" 2>/dev/null || true
           start_container "$image_uri"
 
+          # Stage 4 — verify the Next.js health route before completing deployment.
           if application_is_healthy; then
             echo "Deployment of $image_uri succeeded."
             exit 0
           fi
 
+          # Stage 5 — restore the previous local image when the new one is unhealthy.
           echo "New image failed its local health check; attempting rollback." >&2
           docker rm --force "$container_name" 2>/dev/null || true
 
