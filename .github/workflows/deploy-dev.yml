@@ -52,19 +52,34 @@ jobs:
           role-session-name: caged-frontend-${{ github.run_id }}
           role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
 
-      - name: Build and push the immutable image
+      - name: Build or reuse the immutable image
         id: image
         env:
           IMAGE_TAG: ${{ github.sha }}
         run: |
           set -euo pipefail
           image_uri="$ECR_REPOSITORY_URL:$IMAGE_TAG"
-          ecr_registry="${ECR_REPOSITORY_URL%/*}"
+          repository_name="${ECR_REPOSITORY_URL#*/}"
+          lookup_error="$(mktemp)"
+          trap 'rm --force "$lookup_error"' EXIT
 
-          aws ecr get-login-password --region "$AWS_REGION" \
-            | docker login --username AWS --password-stdin "$ecr_registry"
-          docker build --platform linux/amd64 --tag "$image_uri" .
-          docker push "$image_uri"
+          if aws ecr describe-images \
+            --repository-name "$repository_name" \
+            --image-ids imageTag="$IMAGE_TAG" \
+            --region "$AWS_REGION" \
+            >/dev/null 2>"$lookup_error"; then
+            echo "Reusing existing image $image_uri."
+          elif grep --quiet "ImageNotFoundException" "$lookup_error"; then
+            ecr_registry="${ECR_REPOSITORY_URL%/*}"
+            aws ecr get-login-password --region "$AWS_REGION" \
+              | docker login --username AWS --password-stdin "$ecr_registry"
+            docker build --platform linux/amd64 --tag "$image_uri" .
+            docker push "$image_uri"
+          else
+            cat "$lookup_error" >&2
+            exit 1
+          fi
+
           echo "image_uri=$image_uri" >> "$GITHUB_OUTPUT"
 
       - name: Deploy with SSM and roll back an unhealthy image
@@ -132,6 +147,9 @@ jobs:
           chmod 600 "$runtime_env_file"
           test -s "$runtime_env_file"
 
+          ecr_registry="${image_uri%%/*}"
+          aws ecr get-login-password --region "$aws_region" \
+            | docker login --username AWS --password-stdin "$ecr_registry"
           docker pull "$image_uri"
           docker rm --force "$container_name" 2>/dev/null || true
           start_container "$image_uri"

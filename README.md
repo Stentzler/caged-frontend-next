@@ -54,4 +54,6 @@ docker build --tag dataempregos:local .
 Pushes to `develop` deploy the immutable commit-SHA image to the development
 EC2 host through GitHub OIDC, ECR, and Systems Manager. The complete GitHub
 environment configuration and first-deployment checklist are in
-[CICD_SETUP_GUIDE.md](CICD_SETUP_GUIDE.md).
+[CICD_SETUP_GUIDE.md](CICD_SETUP_GUIDE.md). If a previous run has already
+pushed the same commit-SHA image, a retry reuses that immutable image and
+continues with deployment instead of attempting to overwrite its ECR tag.
