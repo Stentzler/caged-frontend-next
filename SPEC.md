@@ -713,6 +713,7 @@ The application validates environment values at startup or first server use.
 | `SITE_CBO_SOURCE_URL` | Rendered public link | Yes in production | Official CBO source |
 | `SITE_GITHUB_URL` | Rendered public link | Yes in production | Maintainer/project link |
 | `SITE_CONTACT_EMAIL` | Rendered public link | Yes in production | Public contact address |
+| `SITE_URL` | Server metadata | Recommended in production | Canonical public site origin for sitemap and search metadata |
 
 The current static CBO source deliberately avoids a feature switch until the
 future Lambda contract exists. The future integration must keep an all-families

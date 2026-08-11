@@ -1,7 +1,13 @@
 {
   "Metadata": {
     "title": "DataEmpregos",
-    "description": "Explore monthly formal-employment movements in Brazil."
+    "description": "Explore monthly formal-employment movements in Brazil.",
+    "homeTitle": "Formal employment data in Brazil",
+    "homeDescription": "Explore monthly Novo CAGED data on admissions, dismissals, employment balance, and admission salaries.",
+    "occupationsTitle": "Professions available in DataEmpregos",
+    "occupationsDescription": "Browse the CBO profession groups available to filter DataEmpregos data.",
+    "aboutTitle": "Data methodology and sources",
+    "aboutDescription": "Learn about the sources, groupings, and limitations of the formal-employment data presented by DataEmpregos."
   },
   "Brand": {
     "name": "DataEmpregos"

@@ -37,11 +37,26 @@ listens on port 3000 and exposes `GET /health`. At runtime, production must also
 provide the public links used in the footer, About, and Professions pages:
 
 ```bash
+SITE_URL=https://dataempregos.stentzler.com.br
 SITE_OFFICIAL_SOURCE_URL=https://pdet.mte.gov.br/novo-caged
 SITE_CBO_SOURCE_URL=https://www.gov.br/trabalho-e-emprego/pt-br/assuntos/cbo
 SITE_GITHUB_URL=https://github.com/Stentzler
 SITE_CONTACT_EMAIL=you@example.com
 ```
+
+`SITE_URL` is the canonical public origin used in SEO metadata, `robots.txt`,
+and `sitemap.xml`. It defaults to the current DataEmpregos public domain so an
+existing deployment remains functional until its runtime environment is updated.
+
+## Search indexing
+
+The application publishes `/robots.txt` and `/sitemap.xml`. The sitemap covers
+the localized Home, Professions, and About pages only; it intentionally excludes
+the health endpoint and transient analytics results. Each page emits a canonical
+URL, locale alternates, Open Graph metadata, and `WebSite` structured data.
+
+After deployment, add `https://dataempregos.stentzler.com.br/sitemap.xml` to
+Google Search Console and monitor indexing there.
 
 Build the image with:
 

@@ -1,8 +1,33 @@
 import { connection } from "next/server";
+import type { Metadata } from "next";
+import { hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { getPublicSiteConfiguration } from "@/config/public-site";
+import { createPageMetadata } from "@/config/seo";
+import { routing } from "@/i18n/routing";
 
 export const instant = false;
+
+type AboutPageProps = Readonly<{
+  params: Promise<{ locale: string }>;
+}>;
+
+export async function generateMetadata({ params }: AboutPageProps): Promise<Metadata> {
+  const { locale } = await params;
+
+  if (!hasLocale(routing.locales, locale)) {
+    return {};
+  }
+
+  const t = await getTranslations({ locale, namespace: "Metadata" });
+
+  return createPageMetadata({
+    description: t("aboutDescription"),
+    locale,
+    page: "about",
+    title: t("aboutTitle"),
+  });
+}
 
 export default async function AboutPage() {
   await connection();

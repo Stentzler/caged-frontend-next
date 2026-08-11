@@ -1,10 +1,35 @@
 import { connection } from "next/server";
+import type { Metadata } from "next";
+import { hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { getPublicSiteConfiguration } from "@/config/public-site";
+import { createPageMetadata } from "@/config/seo";
 import occupationalFamilies from "@/data/cbo-occupational-families.json";
 import { OccupationalFamilyList } from "@/components/occupations/occupational-family-list";
+import { routing } from "@/i18n/routing";
 
 export const instant = false;
+
+type OccupationsPageProps = Readonly<{
+  params: Promise<{ locale: string }>;
+}>;
+
+export async function generateMetadata({ params }: OccupationsPageProps): Promise<Metadata> {
+  const { locale } = await params;
+
+  if (!hasLocale(routing.locales, locale)) {
+    return {};
+  }
+
+  const t = await getTranslations({ locale, namespace: "Metadata" });
+
+  return createPageMetadata({
+    description: t("occupationsDescription"),
+    locale,
+    page: "occupations",
+    title: t("occupationsTitle"),
+  });
+}
 
 export default async function OccupationsPage() {
   await connection();

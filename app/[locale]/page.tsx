@@ -1,8 +1,33 @@
+import type { Metadata } from "next";
+import { hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { QueryForm } from "@/components/filters/query-form";
+import { createPageMetadata } from "@/config/seo";
 import occupationalFamilies from "@/data/cbo-occupational-families.json";
 import geography from "@/data/caged-geography.json";
+import { routing } from "@/i18n/routing";
 import { loadDatasetCatalog } from "@/server/caged/dataset-catalog-service";
+
+type HomePageProps = Readonly<{
+  params: Promise<{ locale: string }>;
+}>;
+
+export async function generateMetadata({ params }: HomePageProps): Promise<Metadata> {
+  const { locale } = await params;
+
+  if (!hasLocale(routing.locales, locale)) {
+    return {};
+  }
+
+  const t = await getTranslations({ locale, namespace: "Metadata" });
+
+  return createPageMetadata({
+    description: t("homeDescription"),
+    locale,
+    page: "home",
+    title: t("homeTitle"),
+  });
+}
 
 export default async function HomePage() {
   const [t, catalogResult] = await Promise.all([
