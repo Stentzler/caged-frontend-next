@@ -2,8 +2,8 @@
   "Metadata": {
     "title": "DataEmpregos",
     "description": "Explore a movimentação mensal do emprego formal no Brasil.",
-    "homeTitle": "Dados do emprego formal no Brasil",
-    "homeDescription": "Consulte dados mensais de admissões, desligamentos, saldo de empregos e salários de admissão do Novo CAGED.",
+    "homeTitle": "DataEmpregos | Dados do emprego formal no Brasil",
+    "homeDescription": "Consulte dados do Novo CAGED sobre admissões, desligamentos, saldo de empregos e salários de admissão por estado, cidade e profissão no Brasil.",
     "occupationsTitle": "Profissões disponíveis no DataEmpregos",
     "occupationsDescription": "Consulte os grupos de profissões da CBO disponíveis para filtrar os dados do DataEmpregos.",
     "aboutTitle": "Metodologia e fontes dos dados",

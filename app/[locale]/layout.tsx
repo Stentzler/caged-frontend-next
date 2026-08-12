@@ -26,6 +26,12 @@ export async function generateMetadata({ params }: LocaleLayoutProps): Promise<M
 
   return {
     metadataBase: getSiteUrl(),
+    icons: {
+      icon: {
+        type: "image/svg+xml",
+        url: "/favicon.svg",
+      },
+    },
     openGraph: {
       siteName: t("title"),
       type: "website",
