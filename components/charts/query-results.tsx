@@ -81,6 +81,10 @@ function summarizePeriod(monthlyMetrics: readonly MonthlyMetrics[]): PeriodSumma
   };
 }
 
+function hasNoEmploymentMovements(summary: PeriodSummary): boolean {
+  return summary.admissions === 0 && summary.dismissals === 0;
+}
+
 function getNetBalanceDomain(monthlyMetrics: readonly MonthlyMetrics[]): [number, number] {
   const largestMagnitude = Math.max(
     1,
@@ -148,6 +152,7 @@ export function QueryResults({ result }: QueryResultsProps) {
   const professionTitle =
     result.profession.code === "ALL" ? t("allProfessions") : result.profession.title;
   const showCharts = monthlyMetrics.length > 1;
+  const hasNoEmploymentMovementsInPeriod = hasNoEmploymentMovements(periodSummary);
   const summaryCards = [
     { label: t("admissions"), value: formatCount(periodSummary.admissions) },
     { label: t("dismissals"), value: formatCount(periodSummary.dismissals) },
@@ -202,127 +207,148 @@ export function QueryResults({ result }: QueryResultsProps) {
         </dl>
       </section>
 
-      {showCharts ? <div className="grid gap-6 lg:grid-cols-2">
-        <ChartCard title={t("admissionsAndDismissalsTitle")}>
-          <ResponsiveContainer height="100%" width="100%">
-            <LineChart accessibilityLayer data={monthlyMetrics} margin={{ left: 8, right: 16, top: 8 }}>
-              <CartesianGrid stroke="var(--chart-grid)" strokeDasharray="3 3" />
-              <XAxis dataKey="month" tickFormatter={formatMonthLabel} />
-              <YAxis tickFormatter={formatCount} width={countAxisWidth} />
-              <Tooltip
-                formatter={formatTooltipCount}
-                labelFormatter={formatTooltipMonth}
-              />
-              <Legend />
-              <Line
-                isAnimationActive={!prefersReducedMotion}
-                dataKey="admissions"
-                name={t("admissions")}
-                stroke="var(--primary)"
-                strokeWidth={2}
-                type="monotone"
-              />
-              <Line
-                isAnimationActive={!prefersReducedMotion}
-                dataKey="dismissals"
-                name={t("dismissals")}
-                stroke="var(--comparison)"
-                strokeDasharray="6 4"
-                strokeWidth={2}
-                type="monotone"
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        </ChartCard>
-
-        <ChartCard title={t("netBalanceTitle")}>
-          <ResponsiveContainer height="100%" width="100%">
-            <BarChart accessibilityLayer data={monthlyMetrics} margin={{ left: 8, right: 16, top: 8 }}>
-              <CartesianGrid stroke="var(--chart-grid)" strokeDasharray="3 3" />
-              <XAxis dataKey="month" tickFormatter={formatMonthLabel} />
-              <YAxis
-                domain={netBalanceDomain}
-                tickFormatter={formatCount}
-                width={countAxisWidth}
-              />
-              <Tooltip
-                formatter={formatTooltipCount}
-                labelFormatter={formatTooltipMonth}
-              />
-              <ReferenceLine stroke="var(--muted-foreground)" y={0} />
-              <Bar
-                dataKey="netBalance"
-                isAnimationActive={!prefersReducedMotion}
-                name={t("netBalance")}
-              >
-                {monthlyMetrics.map((metrics) => (
-                  <Cell
-                    fill={metrics.netBalance >= 0 ? "var(--positive)" : "var(--negative)"}
-                    key={metrics.month}
-                  />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
-        </ChartCard>
-
-        <ChartCard title={t("averageSalaryTitle")}>
-          <ResponsiveContainer height="100%" width="100%">
-            <LineChart accessibilityLayer data={monthlyMetrics} margin={{ left: 12, right: 16, top: 8 }}>
-              <CartesianGrid stroke="var(--chart-grid)" strokeDasharray="3 3" />
-              <XAxis dataKey="month" tickFormatter={formatMonthLabel} />
-              <YAxis tickFormatter={(value: number) => formatCurrency(value, locale)} width={92} />
-              <Tooltip
-                formatter={formatTooltipCurrency}
-                labelFormatter={formatTooltipMonth}
-              />
-              <Line
-                isAnimationActive={!prefersReducedMotion}
-                dataKey="avgSalary"
-                name={t("averageSalary")}
-                stroke="var(--primary)"
-                strokeWidth={2}
-                type="monotone"
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        </ChartCard>
-      </div> : null}
-
-      <section className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 sm:p-6">
-        <h3 className="text-lg font-bold text-[var(--foreground)]">{t("tableTitle")}</h3>
-        <div className="mt-4 overflow-x-auto">
-          <table className="min-w-full text-left text-sm">
-            <caption className="sr-only">{t("tableCaption")}</caption>
-            <thead className="border-b border-[var(--border)] text-[var(--muted-foreground)]">
-              <tr>
-                <th className="whitespace-nowrap px-3 py-3 font-semibold" scope="col">{t("month")}</th>
-                <th className="whitespace-nowrap px-3 py-3 font-semibold" scope="col">{t("admissions")}</th>
-                <th className="whitespace-nowrap px-3 py-3 font-semibold" scope="col">{t("dismissals")}</th>
-                <th className="whitespace-nowrap px-3 py-3 font-semibold" scope="col">{t("netBalance")}</th>
-                <th className="whitespace-nowrap px-3 py-3 font-semibold" scope="col">{t("totalTurnover")}</th>
-                <th className="whitespace-nowrap px-3 py-3 font-semibold" scope="col">{t("averageSalary")}</th>
-                <th className="whitespace-nowrap px-3 py-3 font-semibold" scope="col">{t("salaryCount")}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {monthlyMetrics.map((metrics) => (
-                <tr className="border-b border-[var(--border)] last:border-0" key={metrics.month}>
-                  <th className="whitespace-nowrap px-3 py-3 font-medium" scope="row">
-                    {formatMonthLabel(metrics.month)}
-                  </th>
-                  <td className="whitespace-nowrap px-3 py-3">{formatCount(metrics.admissions)}</td>
-                  <td className="whitespace-nowrap px-3 py-3">{formatCount(metrics.dismissals)}</td>
-                  <td className="whitespace-nowrap px-3 py-3">{formatCount(metrics.netBalance)}</td>
-                  <td className="whitespace-nowrap px-3 py-3">{formatCount(metrics.totalTurnover)}</td>
-                  <td className="whitespace-nowrap px-3 py-3">{formatCurrency(metrics.avgSalary, locale)}</td>
-                  <td className="whitespace-nowrap px-3 py-3">{formatCount(metrics.salaryCount)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      {hasNoEmploymentMovementsInPeriod ? (
+        <div className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-6">
+          <p className="text-[var(--muted-foreground)]">
+            {result.query.from === result.query.to
+              ? t("noEmploymentMovementsSingle", {
+                  location: result.location.name,
+                  month: formatMonthLabel(result.query.from),
+                  profession: professionTitle,
+                })
+              : t("noEmploymentMovements", {
+                  from: formatMonthLabel(result.query.from),
+                  location: result.location.name,
+                  profession: professionTitle,
+                  to: formatMonthLabel(result.query.to),
+                })}
+          </p>
         </div>
-      </section>
+      ) : (
+        <>
+          {showCharts ? <div className="grid gap-6 lg:grid-cols-2">
+            <ChartCard title={t("admissionsAndDismissalsTitle")}>
+              <ResponsiveContainer height="100%" width="100%">
+                <LineChart accessibilityLayer data={monthlyMetrics} margin={{ left: 8, right: 16, top: 8 }}>
+                  <CartesianGrid stroke="var(--chart-grid)" strokeDasharray="3 3" />
+                  <XAxis dataKey="month" tickFormatter={formatMonthLabel} />
+                  <YAxis tickFormatter={formatCount} width={countAxisWidth} />
+                  <Tooltip
+                    formatter={formatTooltipCount}
+                    labelFormatter={formatTooltipMonth}
+                  />
+                  <Legend />
+                  <Line
+                    isAnimationActive={!prefersReducedMotion}
+                    dataKey="admissions"
+                    name={t("admissions")}
+                    stroke="var(--primary)"
+                    strokeWidth={2}
+                    type="monotone"
+                  />
+                  <Line
+                    isAnimationActive={!prefersReducedMotion}
+                    dataKey="dismissals"
+                    name={t("dismissals")}
+                    stroke="var(--comparison)"
+                    strokeDasharray="6 4"
+                    strokeWidth={2}
+                    type="monotone"
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </ChartCard>
+
+            <ChartCard title={t("netBalanceTitle")}>
+              <ResponsiveContainer height="100%" width="100%">
+                <BarChart accessibilityLayer data={monthlyMetrics} margin={{ left: 8, right: 16, top: 8 }}>
+                  <CartesianGrid stroke="var(--chart-grid)" strokeDasharray="3 3" />
+                  <XAxis dataKey="month" tickFormatter={formatMonthLabel} />
+                  <YAxis
+                    domain={netBalanceDomain}
+                    tickFormatter={formatCount}
+                    width={countAxisWidth}
+                  />
+                  <Tooltip
+                    formatter={formatTooltipCount}
+                    labelFormatter={formatTooltipMonth}
+                  />
+                  <ReferenceLine stroke="var(--muted-foreground)" y={0} />
+                  <Bar
+                    dataKey="netBalance"
+                    isAnimationActive={!prefersReducedMotion}
+                    name={t("netBalance")}
+                  >
+                    {monthlyMetrics.map((metrics) => (
+                      <Cell
+                        fill={metrics.netBalance >= 0 ? "var(--positive)" : "var(--negative)"}
+                        key={metrics.month}
+                      />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </ChartCard>
+
+            <ChartCard title={t("averageSalaryTitle")}>
+              <ResponsiveContainer height="100%" width="100%">
+                <LineChart accessibilityLayer data={monthlyMetrics} margin={{ left: 12, right: 16, top: 8 }}>
+                  <CartesianGrid stroke="var(--chart-grid)" strokeDasharray="3 3" />
+                  <XAxis dataKey="month" tickFormatter={formatMonthLabel} />
+                  <YAxis tickFormatter={(value: number) => formatCurrency(value, locale)} width={92} />
+                  <Tooltip
+                    formatter={formatTooltipCurrency}
+                    labelFormatter={formatTooltipMonth}
+                  />
+                  <Line
+                    isAnimationActive={!prefersReducedMotion}
+                    dataKey="avgSalary"
+                    name={t("averageSalary")}
+                    stroke="var(--primary)"
+                    strokeWidth={2}
+                    type="monotone"
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </ChartCard>
+          </div> : null}
+
+          <section className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 sm:p-6">
+            <h3 className="text-lg font-bold text-[var(--foreground)]">{t("tableTitle")}</h3>
+            <div className="mt-4 overflow-x-auto">
+              <table className="min-w-full text-left text-sm">
+                <caption className="sr-only">{t("tableCaption")}</caption>
+                <thead className="border-b border-[var(--border)] text-[var(--muted-foreground)]">
+                  <tr>
+                    <th className="whitespace-nowrap px-3 py-3 font-semibold" scope="col">{t("month")}</th>
+                    <th className="whitespace-nowrap px-3 py-3 font-semibold" scope="col">{t("admissions")}</th>
+                    <th className="whitespace-nowrap px-3 py-3 font-semibold" scope="col">{t("dismissals")}</th>
+                    <th className="whitespace-nowrap px-3 py-3 font-semibold" scope="col">{t("netBalance")}</th>
+                    <th className="whitespace-nowrap px-3 py-3 font-semibold" scope="col">{t("totalTurnover")}</th>
+                    <th className="whitespace-nowrap px-3 py-3 font-semibold" scope="col">{t("averageSalary")}</th>
+                    <th className="whitespace-nowrap px-3 py-3 font-semibold" scope="col">{t("salaryCount")}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {monthlyMetrics.map((metrics) => (
+                    <tr className="border-b border-[var(--border)] last:border-0" key={metrics.month}>
+                      <th className="whitespace-nowrap px-3 py-3 font-medium" scope="row">
+                        {formatMonthLabel(metrics.month)}
+                      </th>
+                      <td className="whitespace-nowrap px-3 py-3">{formatCount(metrics.admissions)}</td>
+                      <td className="whitespace-nowrap px-3 py-3">{formatCount(metrics.dismissals)}</td>
+                      <td className="whitespace-nowrap px-3 py-3">{formatCount(metrics.netBalance)}</td>
+                      <td className="whitespace-nowrap px-3 py-3">{formatCount(metrics.totalTurnover)}</td>
+                      <td className="whitespace-nowrap px-3 py-3">{formatCurrency(metrics.avgSalary, locale)}</td>
+                      <td className="whitespace-nowrap px-3 py-3">{formatCount(metrics.salaryCount)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </>
+      )}
     </section>
   );
 }

@@ -88,6 +88,8 @@
     "tableCaption": "Monthly values returned by the query",
     "month": "Month",
     "noData": "There is no monthly data for this query.",
+    "noEmploymentMovements": "There were no admissions or dismissals for {profession} in {location} from {from} to {to}.",
+    "noEmploymentMovementsSingle": "There were no admissions or dismissals for {profession} in {location} in {month}.",
     "notAvailable": "Not available"
   },
   "Occupations": {

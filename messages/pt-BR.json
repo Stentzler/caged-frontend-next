@@ -88,6 +88,8 @@
     "tableCaption": "Valores mensais retornados pela consulta",
     "month": "Mês",
     "noData": "Não há dados mensais para esta consulta.",
+    "noEmploymentMovements": "Não houve admissões ou desligamentos para {profession} em {location} no período de {from} à {to}.",
+    "noEmploymentMovementsSingle": "Não houve admissões ou desligamentos para {profession} em {location} em {month}.",
     "notAvailable": "Não disponível"
   },
   "Occupations": {

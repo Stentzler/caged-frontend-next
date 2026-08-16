@@ -350,6 +350,7 @@ not compress columns into illegible text.
 | Condition | Required response |
 | --- | --- |
 | No returned months | Explain that no data is available for the selection and keep filters editable |
+| Returned months with zero admissions and dismissals throughout | Keep the aggregate summary cards and replace charts and the monthly table with a localized no-movements message |
 | Structural form issue | Inline localized message associated with the relevant control |
 | Lambda 400 | Localized invalid-query message; a safe backend message may be mapped, never blindly injected as HTML |
 | WAF/Nginx 429 | Explain the request limit and ask the visitor to wait before trying again |
